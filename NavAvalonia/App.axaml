@@ -1,0 +1,21 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="NavAvalonia.App"
+             xmlns:local="using:NavAvalonia"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <FluentTheme />
+      <Style Selector="Window">
+        <Setter Property="FontFamily" Value="ShuHeiTi"/>
+      </Style>
+    </Application.Styles>
+  <Application.Resources>
+    <FontFamily x:Key="ShuHeiTi">avares://NavAvalonia/Assets/Fonts#AlimamaShuHeiTi-Bold</FontFamily>
+  </Application.Resources>
+</Application>

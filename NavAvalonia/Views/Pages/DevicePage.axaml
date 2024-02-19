@@ -1,0 +1,144 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:NavAvalonia.ViewModels"
+             xmlns:c="clr-namespace:NavAvalonia.Converters;assembly=NavAvalonia"
+             xmlns:zxc="clr-namespace:AvaloniaComponents.Components;assembly=AvaloniaComponents"
+             x:DataType="vm:DeviceViewModel"
+             
+             x:Class="NavAvalonia.Views.Pages.DevicePage">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:DeviceViewModel/>
+  </Design.DataContext>
+  <UserControl.Resources>
+   
+  </UserControl.Resources>
+
+  <UserControl.Styles>
+     <Style  Selector="CheckBox">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="CheckBox">
+            <Grid Background="Transparent">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+              </Grid.ColumnDefinitions>
+              <Border Background="White" BorderBrush="#FF296DB9" BorderThickness="1" CornerRadius="3" Width="15" Height="15"
+                      VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" Name="bor">
+                <Path Data="M0 3 3 6 9 0" Stroke="White" StrokeThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+              </Border>
+             <ContentPresenter    ContentTemplate="{Binding}" Content="{TemplateBinding Content}"
+                                Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+             
+            </Grid>
+            
+          </ControlTemplate>
+          
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style  Selector="CheckBox[IsChecked=True] Border#bor">
+      <Setter  Property="Background" Value="#FF296DB9"/>
+     
+    </Style>
+    </UserControl.Styles>
+  
+  
+  <Grid Margin="10" >
+    <Grid.RowDefinitions>
+      <RowDefinition Height="30"/>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+    <CheckBox  Content="实时采集"  IsChecked="{Binding MonitorState}"/>
+
+    <ItemsControl Grid.Row="1" ItemsSource="{Binding DeviceList}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate DataType="vm:DeviceItemModel">
+          <Grid Width="220">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="220"/>
+              <RowDefinition Height="20"/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!--图像-->
+            <Border BorderBrush="#FF296DB9" BorderThickness="0,1,0,0" CornerRadius="10" Margin="10"
+                    Background="White">
+              <Border.Effect>
+                <DropShadowEffect BlurRadius="10"  Opacity="0.2" Color="#FF296DB9"/>
+              </Border.Effect>
+              <Border.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                  <GradientStop Color="#FFFFFF" Offset="0"/>
+                  <GradientStop Color="#BBFFFFFF" Offset="0.3"/>
+                  <GradientStop Color="#BBFFFFFF" Offset="0.7"/>
+                  <GradientStop Color="#FFFFFF" Offset="1"/>
+                </LinearGradientBrush>
+              </Border.OpacityMask>
+              <Image Source="{Binding Image,Mode=TwoWay}" Margin="20,40,50,20">
+               
+              </Image>
+             
+            </Border>
+          <zxc:WarningLight LightState="{Binding LightType}"
+                              VerticalAlignment="Top"
+                              HorizontalAlignment="Right"
+                              Width="15"
+                              Margin="30"/>
+
+
+            <!--设备名称-->
+            <Border Background="#FF296DB9" Height="30" Width="130" CornerRadius="15" VerticalAlignment="Top" Grid.RowSpan="2" Grid.Row="1" >
+              <TextBlock Text="{Binding Title}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+            </Border>
+
+            <!--属性列表-->
+            <Border Grid.Row="1" Grid.RowSpan="2" Margin="10,15,10,0" BorderBrush="#FF296DB9" BorderThickness="0,1,0,0">
+              <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                  <GradientStop Color="#55F7F9FA" Offset="0"/>
+                  <GradientStop Color="#FFD4EEFB" Offset="0.7"/>
+                </LinearGradientBrush>
+              </Border.Background>
+
+              <ItemsControl ItemsSource="{Binding Properties}" Margin="10,25,10,0">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Grid Height="30">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition/>
+                      </Grid.ColumnDefinitions>
+                      <!--绑定属性名称 -->
+                      <TextBlock Text="{Binding PropName}"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Right"
+                                 Foreground="#888"
+                                 Margin="0,0,5,0"/>
+                      <!--绑定属性值-->
+                      <TextBlock Text="{Binding PropValue}"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 Grid.Column="1"
+                                 Foreground="#FF296DB9"
+                                 Margin="5,0,0,0"/>
+                    </Grid>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </Border>
+          </Grid>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </Grid>
+</UserControl>

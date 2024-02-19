@@ -1,0 +1,273 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:NavAvalonia.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="NavAvalonia.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+          ExtendClientAreaToDecorationsHint="True"
+         ExtendClientAreaChromeHints="NoChrome"
+         ExtendClientAreaTitleBarHeightHint="-1"
+        Title="NavAvalonia">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+  <Window.Background>
+    <!--线性渐变-->
+    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+      <GradientStop Color="#F7F9FA" Offset="0"/>
+      <GradientStop Color="#FFD4EEFB" Offset="1"/>
+    </LinearGradientBrush>
+  </Window.Background>
+ 
+  <Window.Resources>
+    <FontFamily x:Key="Iconfont">/Assets/Fonts#iconfont</FontFamily>
+    <FontFamily x:Key="myfont">/Assets/Fonts/myiconfont.ttf#AvaPro</FontFamily>
+    <ControlTemplate TargetType="ToggleButton" x:Key="ArrowButtonTemplate">
+      <Grid Background="Transparent" Name="back">
+        <TextBlock Text="&#xe625;" FontFamily="{StaticResource Iconfont}"
+                   VerticalAlignment="Top" HorizontalAlignment="Left"
+                    Name="arrow" Foreground="{TemplateBinding Foreground}">
+          <TextBlock.RenderTransform>
+            <RotateTransform Angle="-90"/>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+      </Grid>
+
+    </ControlTemplate>
+
+
+  </Window.Resources>
+
+  <Window.Styles>
+    <Style Selector="TreeViewItem" x:DataType="vm:MenuItemModel">
+      <Setter Property="IsExpanded" Value="{Binding IsExpanded,Mode=TwoWay}"/>
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Padding" Value="8,5"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="TreeViewItem">
+            <Grid Background="Transparent" Name="root"     PointerPressed="Grid_PointerPressed"   >
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition MaxWidth="30"/>
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="36"/>
+                <RowDefinition  />
+              </Grid.RowDefinitions>
+              <!--  Background="#FF1D5390"-->
+              <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                      CornerRadius="0" Grid.ColumnSpan="2"
+                      Padding="{TemplateBinding Padding}"
+              TextBlock.Foreground="{TemplateBinding Foreground}" 
+                      >
+                <Grid Name="PART_Header" ColumnDefinitions="Auto,*">
+                 
+                  <TextBlock  x:Name="PART_HeaderIco" Text="{Binding IconCode}" FontFamily="{StaticResource Iconfont}"  FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <ContentPresenter x:Name="PART_HeaderPresenter" Grid.Column="1"
+                                 Focusable="False"
+                                Content="{Binding Header}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalAlignment}"
+                                     Margin="5,0,0,0" FontSize="13"
+                          Padding="{TemplateBinding Padding}"/>
+
+                </Grid>
+                
+                
+                                  
+              </Border>
+              <ToggleButton x:Name="Expander" Grid.Column="1" ClickMode="Press"  
+          IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
+         Template="{StaticResource ArrowButtonTemplate}" />
+         <ItemsPresenter x:Name="ItemsHost"  Margin="18,0,0,0" Grid.ColumnSpan="2" Grid.Row="1"   />        
+											      
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+  
+    
+    </Style>
+    
+    <Style Selector="TreeViewItem[IsExpanded=False] ItemsPresenter#ItemsHost">
+      <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <!--待定#F7F9FA、#0b3d90\FF1D5390-->
+    <Style Selector="TreeViewItem.empty ItemsPresenter#ItemsHost">
+      <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="TreeViewItem[IsSelected=True]">
+     <Setter Property="Background" Value="#0b3d90"/>
+    </Style>
+   <Style Selector="TreeViewItem[IsSelected=True]  ToggleButton#Expander">
+      <Setter Property="Foreground" Value="#F7F9FA"/>
+    </Style>
+    <Style Selector="TreeViewItem[IsSelected=True]  Border#Bd">
+      <Setter Property="Background" Value="#0b3d90"/>
+    </Style>
+    <Style Selector="TreeViewItem[IsSelected=False]">
+      <Setter Property="Background" Value="#FF1D5390"/>
+    </Style>
+    <!--tabitem-->
+    <Style Selector="Button.TabCloseButtonStyle" >
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="3" Background="Transparent"
+                    Name="back">
+              <Path Data="M0 0 8 8M0 8 8 0" Margin="5"
+                    Stroke="{TemplateBinding Foreground}" StrokeThickness="1"/>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style Selector="^:pointerover Border#back">
+        <Setter Property="Background" Value="#BBB"/>
+      </Style>
+    </Style>
+
+<!--ToggleButton-->
+   <Style Selector="ToggleButton[IsChecked=True] TextBlock#arrow">
+      <Setter Property="RenderTransform">
+        <Setter.Value>
+          <RotateTransform Angle="0"/>
+        </Setter.Value>
+      </Setter>
+      <Style Selector="^:pointerover Grid#back">
+        <Setter Property="Background" Value="#11000000"/>
+      </Style> 
+    </Style>
+  </Window.Styles>
+ 
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="180"/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Border Background="#FF1D5390"  BorderBrush="White" BorderThickness="0,0,1,0"/>
+    <!--左侧菜单-->
+    <StackPanel>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15">
+        <Image Source="/Assets/Images/Logo.png" Width="35" Margin="0,0,10,0"/>
+        <TextBlock Text="MES" VerticalAlignment="Center" Foreground="#FFDEFBFF" FontSize="16"/>
+      </StackPanel>
+      <TreeView Background="Transparent" BorderThickness="0" ItemsSource="{Binding TreeList}">
+        <TreeView.ItemTemplate>
+       <TreeDataTemplate ItemsSource="{Binding Children}" >
+       <!--  <Grid>
+           <Grid.ColumnDefinitions>
+             <ColumnDefinition  />
+             <ColumnDefinition/>
+           </Grid.ColumnDefinitions>
+           <TextBlock Text="SSS;"
+                                 FontFamily="{StaticResource Iconfont}"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 FontSize="18"
+                                     />
+
+           <TextBlock Text="{Binding Header}" Grid.Column="1" Margin="5,0,0,0" FontSize="13"/>
+
+         </Grid>-->
+          </TreeDataTemplate>
+        </TreeView.ItemTemplate>
+      </TreeView>
+    </StackPanel>
+
+
+    <!--内容-->
+    <Grid Grid.Column="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="43"/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="10,0">
+        <TextBlock Text="&#xe678;" FontFamily="{StaticResource Iconfont}" FontSize="26" Foreground="#6590C1"/>
+        <TextBlock VerticalAlignment="Center" Margin="10,0" Foreground="#886590C1" FontSize="12">
+          <Run Text="MES"/>
+          <Run Text="/"/>
+          <Run Text="生产统计"/>
+          <Run Text="/"/>
+          <Run Text="设备看板" Foreground="#FF6590C1"/>
+        </TextBlock>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,0"
+                      >
+        <TextBlock Text="&#xe740;" FontFamily="{StaticResource Iconfont}" FontSize="18" VerticalAlignment="Center" Foreground="Orange"/>
+        <TextBlock Text="&#xe693;" FontFamily="{StaticResource Iconfont}" FontSize="18" Margin="10,0" VerticalAlignment="Center"/>
+        <Border Width="22" Height="22" CornerRadius="5">
+          <Border.Background>
+            <ImageBrush Source="../Assets/Images/Jovan.jpg" Stretch="Fill"/>
+          </Border.Background>
+        </Border>
+      </StackPanel>
+
+      <!--tabcontrol-->
+      <TabControl Grid.Row="1"   ItemsSource="{Binding Pages}"
+                  Background="Transparent" BorderThickness="0,1,0,0" BorderBrush="White">
+        <TabControl.Styles>
+          <Style Selector="TabItem" x:DataType="vm:PageItemModel" >
+            <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+            <Setter Property="Background" Value="#336590C1"/>
+            <Setter Property="Margin" Value="2,0"/>
+            <Setter Property="Foreground" Value="#777"/>
+            <Setter Property="Template">
+              <Setter.Value>
+                <!--控件模板-->
+                <ControlTemplate TargetType="TabItem" >
+                  <Grid Background="{TemplateBinding Background}" Height="30">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition/>
+                      <ColumnDefinition Width="auto" MinWidth="10"/>
+                    </Grid.ColumnDefinitions>
+                    <ContentPresenter  Content="{Binding Header}" FontFamily="{TemplateBinding}" FontSize="{TemplateBinding}" VerticalAlignment="Center" Margin="10,5,5,5"/>
+                    <Grid Grid.Column="1" Width="30" Margin="0,0,3,0">
+                      <Button Classes="TabCloseButtonStyle" Grid.Column="1"   Foreground="{TemplateBinding Foreground}" Margin="3,0"
+                              Command="{Binding CloseTabCommand}" CommandParameter="{Binding}"
+              />
+                    </Grid>
+                  </Grid>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+            <Style Selector="^:pointerover">
+              <Setter Property="Background" Value="#EEE"/>
+            </Style>
+          </Style>
+          <Style Selector="TabItem[IsSelected=True]">
+            <Setter Property="Background" Value="#FF6590C1"/>
+            <Setter Property="Foreground" Value="#FFDEFBFF"/>
+          </Style>
+        </TabControl.Styles>
+        <!--Header部分-->
+        <TabControl.ItemTemplate>
+          <!--数据模板-->
+          <DataTemplate>
+           
+          </DataTemplate>
+          
+        </TabControl.ItemTemplate>
+        
+        <!--内容部分-->
+        <TabControl.ContentTemplate>
+          <!--数据模板-->
+          <DataTemplate DataType="vm:PageItemModel">
+            <ContentControl Content="{Binding PageView}"/>
+          </DataTemplate>
+        </TabControl.ContentTemplate>
+      </TabControl>
+    </Grid>
+  </Grid>
+</Window>

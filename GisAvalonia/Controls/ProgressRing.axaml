@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="120" d:DesignHeight="120"
+             xmlns:vm="using:GisAvalonia.ViewModels"
+             x:Class="GisAvalonia.Controls.ProgressRing"
+            
+             xmlns:local="clr-namespace:GisAvalonia.Controls"
+           
+             x:CompileBindings="False"
+                   >
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    
+  </Design.DataContext>
+  <Grid >
+  
+    <ListBox    ItemsSource="{Binding  MarkList,RelativeSource={RelativeSource AncestorType=local:ProgressRing}}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <Grid  />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate x:DataType="local:MarkInfo">
+         
+            <Grid  VerticalAlignment="Top" RenderTransformOrigin="10,10" >
+              <Grid.RenderTransform>
+                <RotateTransform Angle="{Binding  Angle}"  CenterX="40" CenterY="40"/>
+              </Grid.RenderTransform>
+              <Border  Width="4" Height="12" Background="{Binding Color}"/>
+            </Grid>
+
+          
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ListBox>
+
+    <Border Margin="18" BorderThickness="1" CornerRadius="60" >
+      <Border.BorderBrush>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+          <GradientStop Color="Transparent" Offset="0"/>
+          <GradientStop Color="#44056689" Offset="0.6"/>
+        </LinearGradientBrush>
+      </Border.BorderBrush>
+      <Grid>
+        <Border Margin="10" CornerRadius="60"  BorderThickness="1" >
+          <Border.Background>
+            <RadialGradientBrush>
+              <RadialGradientBrush.GradientStops>
+                <GradientStop Color="#2249E3E8" Offset="0.2"/>
+                <GradientStop Color="#0D49E3E8" Offset="0.9"/>
+                <GradientStop Color="Transparent" Offset="2"/>
+              </RadialGradientBrush.GradientStops>
+            </RadialGradientBrush>
+          </Border.Background>
+        </Border>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+          <TextBlock TextAlignment="Center"
+             Text="{Binding Value,RelativeSource={RelativeSource AncestorType=local:ProgressRing}}" FontSize="26" FontWeight="Bold"
+                 Foreground="#4874DE"/>
+          <TextBlock Text="%"  FontSize="8" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+          <TextBlock Text="{Binding Title,RelativeSource={RelativeSource AncestorType=local:ProgressRing}}" FontSize="10" Foreground="#888"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

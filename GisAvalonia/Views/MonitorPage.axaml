@@ -1,0 +1,538 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:GisAvalonia.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="650"
+             xmlns:gbac="clr-namespace:GroupBox.Avalonia.Controls;assembly=GroupBox.Avalonia"
+             xmlns:gbact="using:GroupBox.Avalonia.ControlThemes"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
+             xmlns:c="clr-namespace:GisAvalonia.Controls"
+              xmlns:b="clr-namespace:GisAvalonia.Base"
+             xmlns:map="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
+             xmlns:m="clr-namespace:Mapsui.Layers;assembly=Mapsui"
+             xmlns:link="clr-namespace:HyperText.Avalonia.Controls;assembly=HyperText.Avalonia"
+             x:DataType="vm:MonitorViewModel"
+             x:CompileBindings="True"
+             x:Class="GisAvalonia.Views.MonitorPage">
+  <UserControl.Resources>
+    <LinearGradientBrush x:Key="chartsBackground"  SpreadMethod="Repeat" StartPoint="0,0" EndPoint="0,100">
+      <LinearGradientBrush.GradientStops>
+        <GradientStop Color="Red" Offset="0"/>
+        <GradientStop Color="Orange" Offset="0.5"/>
+        <GradientStop Color="Transparent" Offset="1"/>
+      </LinearGradientBrush.GradientStops>
+    
+    </LinearGradientBrush>
+   </UserControl.Resources>
+  <UserControl.Styles>
+    <Style Selector="gbac|GroupBox">
+      <Setter Property="Margin" Value="5"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="gbac:GroupBox">
+            <Border CornerRadius="5" BorderBrush="#006DA0" BorderThickness="0,1,0,0" Background="#55E1F5FF">
+              <Grid Background="Transparent">
+                <ContentPresenter Content="{TemplateBinding Content}"/>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                  <Border Background="#18EBED" Width="2" Height="15"/>
+                  <TextBlock Text="{Binding Header,RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                         Foreground="#006DA0" Margin="10"/>
+                </StackPanel>
+              </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style Selector="Button">
+      <Setter Property="Foreground" Value="#4874DE"/>
+      <Setter Property="Margin" Value="0,5"/>
+      <Setter Property="Background" Value="#2999"/>
+      
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border CornerRadius="5" Background="{TemplateBinding Background}" Name="border">
+              <ContentPresenter Margin="12,8" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+            </Border>
+            
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style Selector="^:pointerover">
+        <Setter Property="Background" Value="#224874DE"/>
+      </Style>
+    </Style>
+  </UserControl.Styles>
+
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+   
+  </Design.DataContext>
+
+  <Grid >
+    <!--1、微软官方  Bing地图   数据 高德的数据   Key  申请   https://www.bingmapsportal.com/-->
+    <!--2、GMap.NET Google  高德-->
+    <!--3、基于Path数据的地图  经纬度-->
+    <!--这里添加地图-->
+  
+     
+    <map:MapControl Name="map"   BorderBrush="AliceBlue" BorderThickness="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+     <map:MapControl.OpacityMask>
+        <RadialGradientBrush SpreadMethod="Repeat"  Radius="">
+          <RadialGradientBrush.GradientStops>
+            <GradientStop Color="White" Offset="0.1"/>
+            <GradientStop Color="Transparent" Offset="1"/>
+          </RadialGradientBrush.GradientStops>
+          
+        </RadialGradientBrush>
+      </map:MapControl.OpacityMask>
+    <Panel>
+      <Canvas Width="50" Height="80" Margin="120,120,20,20" >
+        <TextBlock Text="&#xe6a0;"
+                   FontFamily="../../Assets/Fonts/#iconfont"
+                   Canvas.Bottom="0" Canvas.Left="16"
+                   FontSize="20" Foreground="OrangeRed"/>
+
+        <Border Width="14" BorderThickness="1" BorderBrush="OrangeRed"
+                CornerRadius="3" Background="White" Canvas.Bottom="20" Canvas.Left="18.5">
+        
+          <ItemsControl ItemsSource="{Binding WHColors}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Border Height="8"  Background="{Binding Color}" CornerRadius="2" Margin="1"/>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </Border>
+        <Border Background="OrangeRed" Canvas.Bottom="0" Canvas.Right="35" CornerRadius="5">
+          <TextBlock Text="武汉/项目A" Margin="5" Foreground="White" FontSize="10"/>
+        </Border>
+      </Canvas>
+
+      <Canvas Width="50" Height="80">
+        <TextBlock Text="&#xe6a0;" FontFamily="../../Assets/Fonts/#iconfont" Canvas.Bottom="0" Canvas.Left="15"
+                   HorizontalAlignment="Center" FontSize="20" Foreground="ForestGreen"/>
+        <Border Background="ForestGreen" Canvas.Bottom="0" Canvas.Right="38" CornerRadius="5">
+          <TextBlock Text="西安/项目B" Margin="5" Foreground="White" FontSize="10"/>
+        </Border>
+
+        <Border Width="14"  BorderThickness="1" BorderBrush="ForestGreen"
+                CornerRadius="3" Background="White" Canvas.Bottom="20" Canvas.Left="18">
+          <StackPanel Margin="0,1">
+            <Border Height="8" Margin="1" Background="ForestGreen" CornerRadius="2"/>
+            <Border Height="8" Margin="1" Background="ForestGreen" CornerRadius="2"/>
+            <Border Height="8" Margin="1" Background="ForestGreen" CornerRadius="2"/>
+            <Border Height="8" Margin="1" Background="ForestGreen" CornerRadius="2"/>
+            <Border Height="8" Margin="1" Background="ForestGreen" CornerRadius="2"/>
+            <Border Height="8" Margin="1" Background="ForestGreen" CornerRadius="2"/>
+            <Border Height="8" Margin="1" Background="ForestGreen" CornerRadius="2"/>
+          </StackPanel>
+        </Border>
+      </Canvas>
+      </Panel>
+    </map:MapControl>
+
+   
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="40"/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+
+      <Grid Grid.Row="1" Margin="10">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition Width="2*"/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--第一列-->
+        <UniformGrid Columns="1">
+          <gbac:GroupBox Header="监测帐号" BorderBrush="#32BFF8" BorderThickness="1" Background="#333B7BE7">
+            <Grid Margin="10,0">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              
+                <TextBlock Grid.Row="1" VerticalAlignment="Center" Margin="0,8">
+                  <Run Text="帐号名称： " Foreground="#888"/>
+                  <Run Text="帐号名称"/>
+                </TextBlock>
+              <link:Hyperlink  Foreground="#006DA0" Grid.Row="1" Alias="[退出]"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
+    
+
+         
+              <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left">
+                <Border Background="#CC3B7BE7" CornerRadius="3" Width="20" Height="15"/>
+                <TextBlock Text="正常" Margin="5,0" FontSize="11" VerticalAlignment="Center" Foreground="#888"/>
+                <Border Background="#AA05A3E4" CornerRadius="3" Width="20" Height="15"/>
+                <TextBlock Text="离线" Margin="5,0" FontSize="11" VerticalAlignment="Center" Foreground="#888"/>
+                <Border Background="#99E44D4E" CornerRadius="3" Width="20" Height="15"/>
+                <TextBlock Text="故障" Margin="5,0" FontSize="11" VerticalAlignment="Center" Foreground="#888"/>
+                <Border Background="LightGray" CornerRadius="3" Width="20" Height="15"/>
+                <TextBlock Text="空闲" Margin="5,0" FontSize="11" VerticalAlignment="Center" Foreground="#888"/>
+              </StackPanel>
+
+              <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition/>
+                  <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+
+                <lvc:PieChart  Margin="10" Series="{Binding StateSeries}"  LegendTextPaint="{Binding TextPaint}"
+                      TooltipTextPaint="{Binding TextPaint}" FontSize="8">
+
+                </lvc:PieChart>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                  <Button Content="远程升级"/>
+                  <Button Content="添加设备"/>
+                </StackPanel>
+              </Grid>
+            </Grid>
+          </gbac:GroupBox>
+          <gbac:GroupBox Header="设备状态" BorderBrush="#32BFF8" BorderThickness="1" Background="#333B7BE7">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              <StackPanel Grid.Row="1" Margin="10,0">
+                <Grid Height="23" Grid.Row="1"
+                      VerticalAlignment="Center" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="设备名称" VerticalAlignment="Center"/>
+                  <TextBlock Text="在线状态" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="运行状态" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Border Height="1" Background="#22006DA0"/>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="D-1001-01" VerticalAlignment="Center"/>
+                  <TextBlock Text="已连接" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="运行中" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="D-1001-01" VerticalAlignment="Center"/>
+                  <TextBlock Text="未连接" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="关机" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="D-1001-01" VerticalAlignment="Center"/>
+                  <TextBlock Text="未连接" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="关机" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="D-1001-01" VerticalAlignment="Center"/>
+                  <TextBlock Text="已连接" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="运行中" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="D-1001-01" VerticalAlignment="Center"/>
+                  <TextBlock Text="已连接" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="运行中" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+              </StackPanel>
+            </Grid>
+          </gbac:GroupBox>
+          <gbac:GroupBox Header="能源消耗" BorderBrush="#32BFF8" BorderThickness="1"
+                    Background="#333B7BE7" ClipToBounds="True">
+            <lvc:CartesianChart Margin="0,10,-4,5"  Series="{Binding Series}"  Title="{Binding Title}">
+           
+           
+            </lvc:CartesianChart>
+          </gbac:GroupBox>
+        </UniformGrid>
+
+        <!--第二列-->
+        <Grid Grid.Column="1">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="180"/>
+          </Grid.RowDefinitions>
+          <gbac:GroupBox Header="供暖排行" BorderBrush="#32BFF8" BorderThickness="1" Background="#333B7BE7" Grid.Row="1">
+            <Grid >
+              <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="20"/>
+              </Grid.RowDefinitions>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Border Background="#4874DE" CornerRadius="3">
+                  <TextBlock Text="按日统计" Margin="8,3" Foreground="White"/>
+                </Border>
+                <TextBlock Text="按月统计" VerticalAlignment="Center" Margin="10,0"/>
+              </StackPanel>
+              <UniformGrid Grid.Row="1" Rows="1" Margin="0,5,0,0">
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="20" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="30" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="40" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="50" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="60" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="70" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="80" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="90" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="20" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="40" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="60" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="80" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="30" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="50" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="70" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="16" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="90" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+                <Border Width="18" Background="#1000" CornerRadius="3">
+                  <Border Background="{StaticResource chartsBackground}" Height="100" VerticalAlignment="Bottom" CornerRadius="3"/>
+                </Border>
+              </UniformGrid>
+
+              <UniformGrid Grid.Row="2" Rows="1" VerticalAlignment="Center" >
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+                <TextBlock Text="1#区域" TextAlignment="Center"/>
+              </UniformGrid>
+            </Grid>
+          </gbac:GroupBox>
+        </Grid>
+
+
+        <!--第三列-->
+        <Grid Grid.Column="2">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+
+          <UniformGrid>
+            <c:ProgressRing Name="p1"  IsEnabled="False"  Width="120" Height="120" Margin="8"  Value="{Binding Value1}" Title="智能设备" ForeColor="Orange"/>
+            <c:ProgressRing Name="p2" IsEnabled="False" Width="120" Height="120" Margin="8" Value="73.0" Title="智能设备" ForeColor="#05A3E4"/>
+            <c:ProgressRing Name="p3" IsEnabled="False" Width="120" Height="120" Margin="8" Value="85.0" Title="智能设备" ForeColor="#E44D4E"/>
+            <c:ProgressRing Name="p4" IsEnabled="False" Width="120" Height="120" Margin="8" Value="17.0" Title="智能设备" ForeColor="#4874DE"/>
+          </UniformGrid>
+
+          <gbac:GroupBox Header="异常警告" BorderBrush="#32BFF8" BorderThickness="1" Background="#333B7BE7" Grid.Row="1">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              <StackPanel Grid.Row="1" Margin="10,0">
+                <Grid Height="23" Grid.Row="1" VerticalAlignment="Center">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="警告时间" VerticalAlignment="Center"/>
+                  <TextBlock Text="设备名称" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="异常记录" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Border Height="1" Background="#22006DA0"/>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2" Height="26" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="2023-03-08 20:00:00" VerticalAlignment="Center"/>
+                  <TextBlock Text="D-1001-01" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <TextBlock Text="输入过欠压" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+              </StackPanel>
+            </Grid>
+          </gbac:GroupBox>
+
+        </Grid>
+      </Grid>
+    </Grid>
+  </Grid>
+</UserControl>

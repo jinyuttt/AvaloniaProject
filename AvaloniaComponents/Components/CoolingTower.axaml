@@ -1,0 +1,128 @@
+<local:ComponentBase xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+              xmlns:local="clr-namespace:AvaloniaComponents.Components"
+             x:Class="AvaloniaComponents.Components.CoolingTower">
+  <Border BorderThickness="1" Name="frame">
+  
+    <Viewbox VerticalAlignment="Center" HorizontalAlignment="Center">
+      <Canvas Width="205" Height="245" Margin="5">
+        <Polygon Points="0,65 40,10 205,10 180,65" Fill="#EEE"/>
+
+        <Path Data="M0 0A60 15 0 0 0 120 0L120 25A60 15 0 0 1 0 25" Canvas.Left="45" Canvas.Top="15">
+          <Path.Fill>
+            <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+              <GradientStop Color="#FFD6D6D6" Offset="0"/>
+              <GradientStop Color="White" Offset="0.519"/>
+              <GradientStop Color="#FFD6D6D6" Offset="1"/>
+            </LinearGradientBrush>
+          </Path.Fill>
+        </Path>
+
+        <Ellipse Width="120" Height="30" Fill="#CCC" Canvas.Left="45"/>
+        <Border Canvas.Left="50" Canvas.Top="-40">
+          <Viewbox Width="110" Height="110" RenderTransformOrigin="0.5,0.5">
+            <Viewbox.RenderTransform>
+              <TransformGroup>
+                <RotateTransform Angle="50" />
+                <ScaleTransform ScaleY="0.25"/>
+              </TransformGroup>
+            </Viewbox.RenderTransform>
+            <Path Data="M605.61792 481.6c110.464-39.808 281.6-67.584 376.192 33.536 92.672 98.944 31.168 350.016-167.232 395.904-186.496 43.136-27.456-356.736-246.912-313.6a108.224 108.224 0 0 1-22.4 15.104c38.4 110.592 62.656 276.416-36.224 369.024s-350.08 31.168-395.968-167.232c-41.344-178.816 325.248-39.424 317.44-220.992a107.648 107.648 0 0 1-30.592-44.8c-110.592 36.288-268.032 55.616-357.504-39.68C-50.44608 409.984 11.18592 159.04 210.03392 113.152c179.2-41.28 40.128 323.648 220.608 317.184a107.584 107.584 0 0 1 46.848-23.04c-37.376-110.784-59.648-273.472 37.824-364.8C614.44992-50.496 865.20192 11.136 911.08992 209.984c43.456 188.48-363.328 24.832-312.256 252.928a106.304 106.304 0 0 1 6.784 18.688z" Fill="#EEE"/>
+          </Viewbox>
+        </Border>
+
+
+        <Grid Width="180" Height="180" Background="LightGray" Canvas.Top="65">
+          <Border VerticalAlignment="Top" Height="140" BorderThickness="10">
+            <Border.Background>
+              <DrawingBrush TileMode="Tile" >
+                <DrawingBrush.Drawing>
+                  <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                      <Pen Brush="#EEE"/>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                      <PathGeometry>
+                        <PathFigure>
+                          <LineSegment Point="10,0"/>
+                          <LineSegment Point="10,10"/>
+                        </PathFigure>
+                      </PathGeometry>
+                    </GeometryDrawing.Geometry>
+                  </GeometryDrawing>
+                </DrawingBrush.Drawing>
+              </DrawingBrush>
+            </Border.Background>
+          </Border>
+          <Grid VerticalAlignment="Bottom" Height="45" Margin="5">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition/>
+              <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Background="#AAA" Margin="2"/>
+            <Border Background="#AAA" Margin="2" Grid.Column="1"/>
+          </Grid>
+        </Grid>
+
+        <Grid Width="180" Height="180" Background="LightGray" Canvas.Top="65" Canvas.Left="180">
+          <Grid.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleX="0.139"/>
+              <SkewTransform AngleY="-65.5"/>
+            </TransformGroup>
+          </Grid.RenderTransform>
+          <Border VerticalAlignment="Top" Height="140" BorderThickness="10">
+            <Border.Background>
+              <DrawingBrush TileMode="Tile">
+                <DrawingBrush.Drawing>
+                  <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                      <Pen Brush="#EEE"/>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                      <PathGeometry>
+                        <PathFigure>
+                          <LineSegment Point="10,0"/>
+                          <LineSegment Point="10,10"/>
+                        </PathFigure>
+                      </PathGeometry>
+                    </GeometryDrawing.Geometry>
+                  </GeometryDrawing>
+                </DrawingBrush.Drawing>
+              </DrawingBrush>
+            </Border.Background>
+          </Border>
+          <Grid VerticalAlignment="Bottom" Height="45" Margin="5">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition/>
+              <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Background="#AAA" Margin="2"/>
+            <Border Background="#AAA" Margin="2" Grid.Column="1"/>
+          </Grid>
+        </Grid>
+
+
+        <Border Width="18" Height="18" CornerRadius="10" Canvas.Left="150" Canvas.Top="80">
+          <Border.Background>
+            <RadialGradientBrush>
+              <GradientStop Color="Gray" Offset="0.5" />
+              <GradientStop Color="White"/>
+            </RadialGradientBrush>
+          </Border.Background>
+        </Border>
+        <Border Width="18" Height="18" CornerRadius="10" Canvas.Left="150" Canvas.Top="105">
+          <Border.Background>
+            <RadialGradientBrush>
+              <GradientStop Color="Gray" Offset="0.6" />
+              <GradientStop Color="White"/>
+            </RadialGradientBrush>
+          </Border.Background>
+        </Border>
+      </Canvas>
+    </Viewbox>
+  </Border>
+</local:ComponentBase>

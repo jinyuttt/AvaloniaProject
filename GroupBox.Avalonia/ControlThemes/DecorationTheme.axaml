@@ -1,0 +1,59 @@
+﻿<Styles x:Class="GroupBox.Avalonia.ControlThemes.DecorationTheme"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:conv="clr-namespace:GroupBox.Avalonia.Converters;assembly=GroupBox.Avalonia"
+        xmlns:gbac="using:GroupBox.Avalonia.Controls">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+  <Style Selector="gbac|GroupBox">
+    <Setter Property="Margin" Value="0,5"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="gbac:GroupBox">
+          <Grid>
+            <Grid.Resources>
+              <conv:RectGeometryConverter x:Key="rectConv" />
+              <Thickness x:Key="BorderMargin">0,10,0,0</Thickness>
+              <Thickness x:Key="BorderPadding">5,10,5,5</Thickness>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto"/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+              <TextBlock Text="{TemplateBinding Header}" Foreground="#7D96C4"/>
+              <TextBlock Text="{TemplateBinding Tag}" Foreground="#55FFFFFF" VerticalAlignment="Bottom" FontSize="10" Margin="15,0,0,0"/>
+            </StackPanel>
+
+            <Border Grid.Row="1" BorderThickness="1" BorderBrush="#447D96C4" Margin="0,7,5,5">
+              <ContentPresenter Content="{TemplateBinding Content}"/>
+            </Border>
+
+            <!--装饰-->
+            <Grid Grid.Row="1" Margin="0,7,0,0">
+              <Border BorderBrush="#447D96C4" BorderThickness="0,0,1,1" Margin="5,5,0,0"/>
+              <Line StartPoint="0,0" EndPoint="5,0" Stroke="#447D96C4" StrokeThickness="1"
+                    HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,0,0"/>
+              <Line StartPoint="0,0" EndPoint="0,5" Stroke="#447D96C4" StrokeThickness="1"
+                    HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,0,0,0"/>
+
+              <Polyline Points="5,0 0,0 0,5" Stroke="#7D96C4" VerticalAlignment="Top"
+                        HorizontalAlignment="Left"/>
+              <Polyline Points="0,0 5,0 5,5" Stroke="#7D96C4" VerticalAlignment="Top"
+                        HorizontalAlignment="Right" Margin="0,0,5,0"/>
+
+              <Polyline Points="0 5 5 5 5 0" Stroke="#FF7D96C4" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="1" Margin="0,0,5,5"/>
+              <Polyline Points="0 0 0 5 5 5" Stroke="#FF7D96C4" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Margin="0,0,0,5"/>
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+
+    </Setter>
+  </Style>
+</Styles>

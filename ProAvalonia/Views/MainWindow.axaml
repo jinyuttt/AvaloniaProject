@@ -1,0 +1,500 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ProAvalonia.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
+        xmlns:b="clr-namespace:ProAvalonia.Base"
+        xmlns:zxc="clr-namespace:ProAvalonia.Controls"
+        xmlns:gbac="clr-namespace:GroupBox.Avalonia.Controls;assembly=GroupBox.Avalonia"
+        xmlns:gbact="using:GroupBox.Avalonia.ControlThemes"
+        x:Class="ProAvalonia.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+         WindowStartupLocation="CenterScreen"
+        ExtendClientAreaToDecorationsHint="True"
+         ExtendClientAreaChromeHints="NoChrome"
+         ExtendClientAreaTitleBarHeightHint="-1"
+        FontFamily="Microsoft YaHei" FontWeight="ExtraLight" 
+        Title="数字工厂监控看板" Height="700" Width="1150"
+        
+       >
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+  <Window.Background>
+    <RadialGradientBrush  GradientOrigin="0.5,-0.8" Center="0.5,0"
+                           Radius="0.7">
+      <GradientStop Color="#A02B40" Offset="0"/>
+      <GradientStop Color="#08113C" Offset="1"/>
+    </RadialGradientBrush>
+  </Window.Background>
+  <Window.Resources>
+    <b:BrushToColorConvert  x:Key="myConverter"/>
+  </Window.Resources>
+  <Window.Styles>
+    <Style Selector="gbac|GroupBox">
+      <Setter Property="Margin" Value="0,5"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="gbac:GroupBox">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="{TemplateBinding Header}" Foreground="#7D96C4"/>
+                <TextBlock Text="{TemplateBinding Tag}" Foreground="#55FFFFFF" VerticalAlignment="Bottom" FontSize="10" Margin="15,0,0,0"/>
+              </StackPanel>
+
+              <Border Grid.Row="1" BorderThickness="1" BorderBrush="#447D96C4" Margin="0,7,5,5">
+                <ContentPresenter Content="{TemplateBinding Content}"/>
+              </Border>
+
+              <!--装饰-->
+              <Grid Grid.Row="1" Margin="0,7,0,0">
+                <Border BorderBrush="#447D96C4" BorderThickness="0,0,1,1" Margin="5,5,0,0"/>
+                <Line StartPoint="0,0" EndPoint="5,0" Stroke="#447D96C4" StrokeThickness="1"
+                      HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,0,0"/>
+                <Line StartPoint="0,0" EndPoint="0,5" Stroke="#447D96C4" StrokeThickness="1"
+                      HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,0,0,0"/>
+
+                <Polyline Points="5,0 0,0 0,5" Stroke="#7D96C4" VerticalAlignment="Top"
+                          HorizontalAlignment="Left"/>
+                <Polyline Points="0,0 5,0 5,5" Stroke="#7D96C4" VerticalAlignment="Top"
+                          HorizontalAlignment="Right" Margin="0,0,5,0"/>
+
+                <Polyline Points="0 5 5 5 5 0" Stroke="#FF7D96C4" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="1" Margin="0,0,5,5"/>
+                <Polyline Points="0 0 0 5 5 5" Stroke="#FF7D96C4" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Margin="0,0,0,5"/>
+              </Grid>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+
+      </Setter>
+    </Style>
+    
+  </Window.Styles>
+  
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="40"/>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+    <Border PointerMoved="Border_PointerMoved" PointerPressed="Border_PointerPressed" Grid.RowSpan="2" VerticalAlignment="Top" Height="80" Margin="-3,-12,-3,0">
+      <Border.Background>
+        <VisualBrush Stretch="Fill">
+          <VisualBrush.Visual>
+            <Path Data="M0,0 
+                              L0,30 400,30 
+                              A15,10,0,0,1,414,35 
+                              L425,51 
+                              A10,10,0,0,0,434,55
+                              L666,55
+                              A10 10 0 0 0 675 51
+                              L686,35
+                              A15 10 0 0 1 700 30
+                              L1100,30 1100,0 z"
+                  StrokeThickness="1"
+                  Stretch="Fill">
+              <Path.Fill>
+                <RadialGradientBrush  Radius="1.8"
+                                    Center="0.5,1.8"
+                                    GradientOrigin="0.5,2">
+                  <GradientStop Color="#2BB6FE" Offset="0"/>
+                  <GradientStop Color="#112BB6FE" Offset="1"/>
+                </RadialGradientBrush>
+              </Path.Fill>
+              <Path.Effect>
+              
+              </Path.Effect>
+              <Path.Stroke>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                  <GradientStop Color="Transparent" Offset="0"/>
+                  <GradientStop Color="#2BB6FE" Offset="0.5"/>
+                  <GradientStop Color="Transparent" Offset="1"/>
+                </LinearGradientBrush>
+              </Path.Stroke>
+            </Path>
+          </VisualBrush.Visual>
+        </VisualBrush>
+      </Border.Background>
+
+    </Border>
+
+    <TextBlock Text="LOGO " Foreground="#2BB6FE"
+               FontSize="16" Margin="20,0,0,0" FontWeight="Bold"
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+    <TextBlock Text="车间实时状况" HorizontalAlignment="Center"
+               Foreground="White" VerticalAlignment="Bottom" FontSize="22"/>
+    <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+      <Run Text="&#xe8a9;" FontFamily="../Assets/Fonts/#iconfont" Foreground="#2BB6FE"/>
+      <Run Text="2024-02-07 10:00:00" Foreground="#44FFFFFF"/>
+    </TextBlock>
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+               >
+      <TextBlock Text="&#xe61c;" FontFamily="../Assets/Fonts/#iconfont"
+                 FontSize="13" VerticalAlignment="Center"/>
+      <TextBlock Text="车间温度"/>
+      <TextBlock Text="0℃" FontSize="10" VerticalAlignment="Center" Margin="0,0,10,0"/>
+      <TextBlock Text="&#xe606;" FontFamily="../Assets/Fonts/#iconfont"
+                 FontSize="13" VerticalAlignment="Center"/>
+      <TextBlock Text="车间湿度"/>
+      <TextBlock Text="60.5%" FontSize="10" VerticalAlignment="Center"/>
+    </StackPanel>
+
+
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition Width="1.8*"/>
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+    <UniformGrid Columns="1" Margin="20,15">
+      <gbac:GroupBox Header="设备运行状态" Tag="Equipment Running Status">
+      
+       <lvc:PieChart 
+            Title="{Binding Title}" LegendPosition="Right"
+            Series="{Binding StateSeries}">
+        </lvc:PieChart>
+      </gbac:GroupBox>
+
+      <gbac:GroupBox  Header="人员绩效" Tag="Workers Performance">
+        <Grid Margin="5,3,10,3">
+          <Grid.RowDefinitions >
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+            <RowDefinition Height="25"/>
+          </Grid.RowDefinitions>
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border Width="8" Height="8" Background="#2BB6FE" Margin="3,0"/>
+            <TextBlock Text="计划" Foreground="#44FFFFFF" FontSize="9"
+                       VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <Border Width="8" Height="8" Background="IndianRed" Margin="3,0"/>
+            <TextBlock Text="实际完成" Foreground="#44FFFFFF" FontSize="9"
+                       VerticalAlignment="Center" Margin="0,0,10,0"/>
+          </StackPanel>
+
+          <ItemsControl Grid.Row="1" ItemsSource="{Binding WorkerCompareList}"
+                        Foreground="#44FFFFFF"  FontSize="10">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <UniformGrid Columns="1"/>
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <Border Grid.Column="2" Margin="0,0,20,0" Name="bor"/>
+                  <TextBlock Text="{Binding Name}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+                  <Border BorderBrush="#FF2BB6FE" BorderThickness="0,1,0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                  <Polygon Points="4,0 0,7 4, 14 8,14 8,0 " Fill="#FF2BB6FE"
+                           Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+                  <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="3,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                      <Border Background="#2BB6FE" Height="5" HorizontalAlignment="Left" Grid.Column="2">
+                        <Border.Width>
+                          <MultiBinding>
+                            <MultiBinding.Converter>
+                              <b:CompareValueConverter/>
+                            </MultiBinding.Converter>
+                            <Binding Path="PlanValue"/>
+                            <Binding ElementName="bor" />
+                          </MultiBinding>
+                        </Border.Width>
+                      </Border>
+                      <TextBlock Text="{Binding PlanValue}" FontSize="8" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                      <Border Background="IndianRed" Height="5" HorizontalAlignment="Left" Grid.Column="2">
+                        <Border.Width>
+                          <MultiBinding>
+                            <MultiBinding.Converter>
+                              <b:CompareValueConverter/>
+                            </MultiBinding.Converter>
+                            <Binding Path="FinishedValue"/>
+                            <Binding ElementName="bor" />
+                          </MultiBinding>
+                        </Border.Width>
+                      </Border>
+                      <TextBlock Text="{Binding FinishedValue}" FontSize="8" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                  </StackPanel>
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+
+          <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="75"/>
+              <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="#44FFFFFF" BorderThickness="0,0,0,1" VerticalAlignment="Top" Grid.Column="1" Margin="0,5,0,0"/>
+            <UniformGrid Rows="1"   Background="#33FFFFFF" Grid.Column="1"  VerticalAlignment="Center">
+              <TextBlock Text="0"/>
+              <TextBlock Text="48"/>
+              <TextBlock Text="96"/>
+              <TextBlock Text="144"/>
+              <TextBlock Text="192"/>
+              <TextBlock Text="240"/>
+            </UniformGrid>
+          </Grid>
+        </Grid>
+      </gbac:GroupBox>
+
+      <gbac:GroupBox Header="报警信息" Tag="Alarm Information">
+        <ItemsControl ItemsSource="{Binding Alarms}"
+                      Foreground="#44FFFFFF"
+                      Height="23"
+                      Margin="3,5,5,5">
+
+        </ItemsControl>
+      </gbac:GroupBox>
+     
+    </UniformGrid>
+
+      <Grid Grid.Column="1" Margin="0,40,0,10">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="110"/>
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+          </Grid.ColumnDefinitions>
+          <TextBlock Foreground="#DD2BB6FE" FontSize="17" VerticalAlignment="Top">
+            <Run Text="当日产量"/>
+            <Run Text="&#xe654;" FontFamily="../Assets/Fonts/#iconfont"/>
+          </TextBlock>
+         
+          <ItemsControl VerticalAlignment="Center" Foreground="White"
+                       FontSize="30" Margin="0,15,0,0"
+                    ItemsSource="{Binding CurrentYeild}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal"/>
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding}" Padding="3,10" Background="#222BB6FE" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0"
+                       Width="22" TextAlignment="Center"/>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+
+          <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
+            <TextBlock Text="计划产量" Foreground="#AA999999" FontSize="12" Margin="0,5"/>
+            <TextBlock Text="196000" Foreground="#CC2BB6FE" FontSize="20"/>
+          </StackPanel>
+
+          <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="完成度" Foreground="#AA999999" FontSize="12" Margin="0,5"/>
+            <TextBlock Text="{Binding FinishRate,StringFormat=\{0\}%}" Foreground="PaleVioletRed" FontSize="18"/>
+          </StackPanel>
+
+          <StackPanel Grid.Column="3" HorizontalAlignment="Center">
+            <TextBlock Text="A产品良品率" Foreground="#AA999999" FontSize="11"/>
+            <zxc:CircularProgressBar Value="0.75" Foreground="White"
+                                     BackColor="{Binding, Converter={StaticResource myConverter},ConverterParameter=#11FFFFFF}"
+                                     Width="55" Height="55" Margin="0,18,0,0">
+             
+            </zxc:CircularProgressBar>
+            
+          </StackPanel>
+
+          <StackPanel Grid.Column="4" HorizontalAlignment="Center">
+            <TextBlock Text="B产品良品率" Foreground="#AA999999" FontSize="11"/>
+            <zxc:CircularProgressBar Value="0.95" Foreground="White"
+                                     BackColor="{Binding, Converter={StaticResource myConverter},ConverterParameter=#11FFFFFF}"
+                                     Width="55" Height="55" Margin="0,18,0,0"/>
+          </StackPanel>
+
+          <StackPanel Grid.Column="5" HorizontalAlignment="Center">
+            <TextBlock Text="C产品良品率" Foreground="#AA999999" FontSize="11"/>
+            <zxc:CircularProgressBar Value="0.45" Foreground="White" BackColor="{Binding, Converter={StaticResource myConverter},ConverterParameter=#11FFFFFF}"
+                                     Width="55" Height="55" Margin="0,18,0,0"/>
+          </StackPanel>
+        </Grid>
+
+        <gbac:GroupBox  Header="生产量/良品率统计" Tag="Yield Statistics" Grid.Row="1">
+         
+          <Grid Margin="20">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="20"/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+              <Border Width="8" Height="8" Background="#2BB6FE" Margin="3,0"/>
+              <TextBlock Text="产量" Foreground="#44FFFFFF" FontSize="9"
+                         VerticalAlignment="Center" Margin="0,0,10,0"/>
+              <Border Width="8" Height="8" Background="IndianRed" Margin="3,0"/>
+              <TextBlock Text="良品率" Foreground="#44FFFFFF" FontSize="9"
+                         VerticalAlignment="Center" Margin="0,0,10,0"/>
+            </StackPanel>
+           
+            <lvc:CartesianChart Grid.Row="1" Series="{Binding Series}">
+              
+           
+            </lvc:CartesianChart>
+          </Grid>
+        </gbac:GroupBox>
+
+
+
+        <gbac:GroupBox Grid.Row="2" Header="机器产量统计" Tag="Production">
+         
+          <lvc:CartesianChart Margin="15,10,15,0"
+                              LegendPosition="Right"
+                               Series="{Binding BarSeries}"
+                              >
+           
+            
+           
+          </lvc:CartesianChart>
+        </gbac:GroupBox>
+      
+    </Grid>
+      <Grid Grid.Column="2" Margin="20,15">
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition Height="1.2*"/>
+        </Grid.RowDefinitions>
+        <gbac:GroupBox  Header="不良指标分页" Tag="Poor Indicators">
+          <ItemsControl ItemsSource="{Binding BadScatter}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <Grid/>
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <zxc:CircularProgressBar Value="{Binding Value}"
+                                         Width="{Binding Size}" Height="{Binding Size}"
+                                         Title="{Binding Title}"
+                                         Foreground="Transparent"/>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </gbac:GroupBox>
+
+        <gbac:GroupBox Header="质量控制" Tag="Quality Control" Grid.Row="1">
+         
+          <Grid Margin="5,3,10,3">
+            <Grid.RowDefinitions >
+              <RowDefinition Height="20"/>
+              <RowDefinition/>
+              <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+              <Border Width="8" Height="8" Background="#2BB6FE" Margin="3,0"/>
+              <TextBlock Text="计划" Foreground="#44FFFFFF" FontSize="9"
+                         VerticalAlignment="Center" Margin="0,0,10,0"/>
+              <Border Width="8" Height="8" Background="IndianRed" Margin="3,0"/>
+              <TextBlock Text="实际完成" Foreground="#44FFFFFF" FontSize="9"
+                         VerticalAlignment="Center" Margin="0,0,10,0"/>
+            </StackPanel>
+
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding QualityList}"
+                         Foreground="#44FFFFFF" FontSize="10">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <UniformGrid Columns="1"/>
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="50"/>
+                      <ColumnDefinition Width="25"/>
+                      <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="2" Margin="0,0,20,0" Name="bor"/>
+                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+                    <Border BorderBrush="#FF2BB6FE" BorderThickness="0,1,0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                    <Polygon Points="4,0 0,7 4, 14 8,14 8,0 " Fill="#FF2BB6FE"
+                             Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="3,0,0,0">
+                      <StackPanel Orientation="Horizontal">
+                        <Border Background="#2BB6FE" Height="5" HorizontalAlignment="Left" Grid.Column="2">
+                          <Border.Width>
+                            <MultiBinding>
+                              <MultiBinding.Converter>
+                                <b:CompareValueConverter/>
+                              </MultiBinding.Converter>
+                              <Binding Path="PlanValue"/>
+                              <Binding ElementName="bor" />
+                            </MultiBinding>
+                          </Border.Width>
+                        </Border>
+                        <TextBlock Text="{Binding PlanValue}" FontSize="8" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                      </StackPanel>
+
+                      <StackPanel Orientation="Horizontal">
+                        <Border Background="IndianRed" Height="5" HorizontalAlignment="Left" Grid.Column="2">
+                          <Border.Width>
+                            <MultiBinding>
+                              <MultiBinding.Converter>
+                                <b:CompareValueConverter/>
+                              </MultiBinding.Converter>
+                              <Binding Path="FinishedValue"/>
+                              <Binding ElementName="bor" />
+                            </MultiBinding>
+                          </Border.Width>
+                        </Border>
+                        <TextBlock Text="{Binding FinishedValue}" FontSize="8" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                      </StackPanel>
+                    </StackPanel>
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Grid Grid.Row="2">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+              <Border BorderBrush="#44FFFFFF" BorderThickness="0,0,0,1" VerticalAlignment="Top" Grid.Column="1" Margin="0,5,0,0"/>
+              <UniformGrid Rows="1"  Grid.Column="1"  VerticalAlignment="Center">
+                <TextBlock Text="0"/>
+                <TextBlock Text="48"/>
+                <TextBlock Text="96"/>
+                <TextBlock Text="144"/>
+                <TextBlock Text="192"/>
+                <TextBlock Text="240"/>
+              </UniformGrid>
+            </Grid>
+          </Grid>
+        </gbac:GroupBox>
+
+      </Grid>
+    </Grid>
+  </Grid>
+</Window>

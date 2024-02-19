@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProAvalonia", "ProAvalonia\ProAvalonia.csproj", "{A4D8457E-FD34-4F81-B465-DAE1550507C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupBox.Avalonia", "GroupBox.Avalonia\GroupBox.Avalonia.csproj", "{4FC5A5DA-C1F7-465E-9951-468D6FC43DEE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GisAvalonia", "GisAvalonia\GisAvalonia.csproj", "{459AEC86-3255-49E6-ABD3-00650466B8F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HyperText.Avalonia", "HyperText.Avalonia\HyperText.Avalonia.csproj", "{6979D79B-0C3D-48E8-A979-C1ACF61E8762}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.MapView", "Mapsui.UI.MapView\Mapsui.UI.MapView.csproj", "{5C39004F-93CC-44FA-A6EC-62DA5B3EEB59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaComponents", "AvaloniaComponents\AvaloniaComponents.csproj", "{85B031F3-0E38-463E-B9F4-EC622DD00313}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavAvalonia", "NavAvalonia\NavAvalonia.csproj", "{D7A338EA-AC17-42B0-9AC1-C9094131C993}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A4D8457E-FD34-4F81-B465-DAE1550507C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4D8457E-FD34-4F81-B465-DAE1550507C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4D8457E-FD34-4F81-B465-DAE1550507C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4D8457E-FD34-4F81-B465-DAE1550507C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FC5A5DA-C1F7-465E-9951-468D6FC43DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FC5A5DA-C1F7-465E-9951-468D6FC43DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FC5A5DA-C1F7-465E-9951-468D6FC43DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FC5A5DA-C1F7-465E-9951-468D6FC43DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{459AEC86-3255-49E6-ABD3-00650466B8F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{459AEC86-3255-49E6-ABD3-00650466B8F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{459AEC86-3255-49E6-ABD3-00650466B8F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{459AEC86-3255-49E6-ABD3-00650466B8F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6979D79B-0C3D-48E8-A979-C1ACF61E8762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6979D79B-0C3D-48E8-A979-C1ACF61E8762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6979D79B-0C3D-48E8-A979-C1ACF61E8762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6979D79B-0C3D-48E8-A979-C1ACF61E8762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C39004F-93CC-44FA-A6EC-62DA5B3EEB59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C39004F-93CC-44FA-A6EC-62DA5B3EEB59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C39004F-93CC-44FA-A6EC-62DA5B3EEB59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C39004F-93CC-44FA-A6EC-62DA5B3EEB59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85B031F3-0E38-463E-B9F4-EC622DD00313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85B031F3-0E38-463E-B9F4-EC622DD00313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85B031F3-0E38-463E-B9F4-EC622DD00313}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85B031F3-0E38-463E-B9F4-EC622DD00313}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7A338EA-AC17-42B0-9AC1-C9094131C993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7A338EA-AC17-42B0-9AC1-C9094131C993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7A338EA-AC17-42B0-9AC1-C9094131C993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7A338EA-AC17-42B0-9AC1-C9094131C993}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05326939-20E7-43F1-9A95-8B9D649328B7}
+	EndGlobalSection
+EndGlobal

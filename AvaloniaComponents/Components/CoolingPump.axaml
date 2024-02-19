@@ -1,0 +1,108 @@
+<local:ComponentBase xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+              xmlns:local="clr-namespace:AvaloniaComponents.Components"
+             x:Class="AvaloniaComponents.Components.CoolingPump">
+  <Border Padding="3" BorderThickness="1" Name="frame">
+  
+
+    <Viewbox >
+      <Canvas Height="400" Width="660">
+        <!--底座-->
+        <Path Data="M0 350h650v50H0z" Fill="#37A9FF" Stretch="Fill" Canvas.Left="0" Canvas.Top="350"/>
+        <Polygon Points="0,350 30,270 659.9,270 650,350" Fill="#70C2FF"/>
+        <Rectangle Width="10" Height="50" Fill="#37A9FF" Canvas.Left="650" Canvas.Top="350">
+          <Rectangle.RenderTransform>
+            <SkewTransform AngleY="-82.85"/>
+          </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <!--进水口-->
+        <Ellipse Width="10" Height="90" Fill="#3FADFF" Canvas.Left="27.81" Canvas.Top="125.258"/>
+        <Rectangle Width="5" Height="90" Fill="#3FADFF" Canvas.Left="32.981" Canvas.Top="125.253"/>
+        <Ellipse Width="10" Height="90" Fill="#70C2FF" Canvas.Left="33.4" Canvas.Top="125.258"/>
+
+        <Ellipse Width="5" Height="70" Fill="#015EA4" Canvas.Left="36.749" Canvas.Top="135.239"/>
+        <Rectangle Width="30" Height="70" Fill="#015EA4" Canvas.Left="39.466" Canvas.Top="135.147"/>
+
+        <!--水泵主体-->
+        <Ellipse Width="13" Height="220" Fill="#3FADFF" Canvas.Top="60.822" Canvas.Left="57.3"/>
+        <Rectangle Width="100" Height="220" Fill="#3FADFF" Canvas.Left="63.51" Canvas.Top="60.822"/>
+        <Ellipse Width="13" Height="220" Fill="#70C2FF" Canvas.Top="60.822" Canvas.Left="157.3"/>
+
+        <!--出水口-->
+        <Ellipse Width="70" Height="50" Fill="#2986BC" Canvas.Left="75.3" Canvas.Top="36.167"/>
+        <Rectangle Height="27.655" Width="70" Fill="#2986BC" Canvas.Left="75.3" Canvas.Top="36.167"/>
+        <Ellipse Width="90" Height="10" Fill="#3FADFF" Canvas.Left="66.1" Canvas.Top="34"/>
+        <Rectangle Height="3" Width="90" Fill="#3FADFF" Canvas.Left="66.1" Canvas.Top="35.86"/>
+        <Ellipse Width="90" Height="10" Fill="#70C2FF" Canvas.Left="66.1" Canvas.Top="30.666"/>
+        <Ellipse Width="59.997" Height="5.999" Fill="#2986BC" Canvas.Left="81.236" Canvas.Top="32.737"/>
+
+        <!--连接轴-->
+        <Rectangle Width="15" Height="50" Fill="#015EA4" RadiusX="5" RadiusY="50" Canvas.Left="163.282" Canvas.Top="145.257"/>
+        <Rectangle Width="25" Height="100" Fill="#3EADFF" RadiusX="5" RadiusY="50" Canvas.Left="169.74" Canvas.Top="120.267"/>
+        <Ellipse Width="9" Height="100" Fill="#70C2FF" Canvas.Left="185.157" Canvas.Top="120.167"/>
+        <Rectangle Width="25" Height="70" Fill="#3EADFF" RadiusX="4" RadiusY="50" Canvas.Left="189.387" Canvas.Top="135.252"/>
+        <Ellipse Width="8" Height="70" Fill="#70C2FF" Canvas.Left="206.39" Canvas.Top="135.264"/>
+        <Rectangle Width="35.6" Height="35" Fill="#015EA4" RadiusX="3" RadiusY="50" Canvas.Left="209.33" Canvas.Top="152.821"/>
+
+        <!--电机-->
+        <Canvas Height="330" Width="621.045" Canvas.Left="0.525">
+
+          <Ellipse Width="13" Height="80" Fill="#3FADFF" Canvas.Left="232" Canvas.Top="130.218"/>
+          <Rectangle Fill="#3FADFF" Width="6.799" Height="80" Canvas.Left="239.25" Canvas.Top="130.225"/>
+          <Ellipse Width="13" Height="80" Fill="#70C2FF" Canvas.Left="239.25" Canvas.Top="130.169"/>
+
+          <Rectangle Width="14.937" Height="40" Fill="#015EA4" Canvas.Top="150.165" Canvas.Left="247"/>
+          <Ellipse Height="40" Width="8" Fill="#015EA4" Canvas.Left="243.25" Canvas.Top="150.165"/>
+
+          <Ellipse Height="50" Width="15" Fill="#86CBFF" Canvas.Left="256" Canvas.Top="145.165"/>
+
+          <Rectangle Width="40" Height="40" Fill="#015EA4" Canvas.Top="150.165" Canvas.Left="265"/>
+          <Ellipse Height="40" Width="10" Fill="#015EA4" Canvas.Left="260" Canvas.Top="150.332"/>
+
+          <Rectangle Fill="#9DD5FF" Width="75" Height="35.45" Canvas.Left="74.69" Canvas.Top="281.16"/>
+          <Ellipse Height="280" Width="20" Fill="#37A9FF" Canvas.Top="30.167" Canvas.Left="282"/>
+          <Path Data="M680 30V310H350V30" Fill="#37A9FF" Canvas.Left="-57"/>
+          <Ellipse Height="280" Width="20" Fill="#1C95EF" Canvas.Top="30.167" Canvas.Left="611"/>
+          <Ellipse Height="217.513" Width="16.567" Fill="#70C2FF" Canvas.Top="61.401" Canvas.Left="617.003"/>
+
+          <Path Fill="#9DD5FF" Canvas.Top="40" Canvas.Left="321" >
+            <Path.Data>
+              <GeometryGroup>
+                <RectangleGeometry Rect="15,0 195 20"/>
+                <RectangleGeometry Rect="10,40 190 20"/>
+                <RectangleGeometry Rect="5,80 185 20"/>
+                <RectangleGeometry Rect="0,120 180 20"/>
+                <RectangleGeometry Rect="5,160 185 20"/>
+                <RectangleGeometry Rect="10,200 190 20"/>
+                <RectangleGeometry Rect="15,240 195 20"/>
+                <RectangleGeometry Rect="15,270 250 20"/>
+              </GeometryGroup>
+            </Path.Data>
+          </Path>
+        </Canvas>
+
+        <!--状态灯-->
+        <Border Width="70" Height="70" CornerRadius="35" Canvas.Left="525" Canvas.Top="100">
+          <Border.Background>
+            <RadialGradientBrush>
+              <GradientStop Color="Gray" Offset="0.5"/>
+              <GradientStop Color="White"/>
+            </RadialGradientBrush>
+          </Border.Background>
+        </Border>
+        <Border Width="70" Height="70" CornerRadius="35" Canvas.Left="525" Canvas.Top="200">
+          <Border.Background>
+            <RadialGradientBrush>
+              <GradientStop Color="Gray" Offset="0.6"/>
+              <GradientStop Color="White"/>
+            </RadialGradientBrush>
+          </Border.Background>
+        </Border>
+      </Canvas>
+    </Viewbox>
+  </Border>
+</local:ComponentBase>

@@ -1,0 +1,156 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GisAvalonia.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1300" d:DesignHeight="700"
+        x:Class="GisAvalonia.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
+        Icon="/Assets/avalonia-logo.ico"
+        xmlns:local="clr-namespace:Zhaoxi.RemoteMonitor"
+        ExtendClientAreaToDecorationsHint="True"
+         ExtendClientAreaChromeHints="NoChrome"
+         ExtendClientAreaTitleBarHeightHint="-1"
+        FontFamily="Microsoft YaHei" FontSize="12" FontWeight="ExtraLight"
+        WindowStartupLocation="CenterScreen" Background="#EEE"
+         Height="700" Width="1300"
+        Title="GisAvalonia">
+  
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+  
+  
+  <Window.Resources>
+  <LinearGradientBrush x:Key="titleBack" StartPoint="0,0" EndPoint="0,1">
+    <GradientStop Color="#4874DE" Offset="0"/>
+    <GradientStop Color="#AA3B7BE7" Offset="1"/>
+  </LinearGradientBrush>
+  </Window.Resources>
+  
+ 
+  
+  <Window.Styles>
+    <Style Selector="RadioButton">
+      <Setter Property="GroupName" Value="AAA"/>
+      <Setter Property="Foreground" Value="#4874DE"/>
+        <Setter Property="Margin" Value="5,0"/>
+    <Setter Property="Background" Value="#1999"/>
+      <Setter Property="IsHitTestVisible" Value="True"/>
+         <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type RadioButton}">
+            <Border CornerRadius="5"  Background="{TemplateBinding Background}" Name="border" >
+              <ContentPresenter Content="{TemplateBinding Content}" Margin="12,5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+          </ControlTemplate>
+        
+        </Setter.Value>
+      </Setter>
+      <Style Selector="^:pointerover">
+        <Setter Property="Background" Value="#224874DE"/>
+      </Style>
+      <Style Selector="^:checked">
+        <Setter Property="Background" Value="{StaticResource titleBack}"/>
+        <Setter Property="Foreground" Value="White"/>
+      </Style>
+    </Style> 
+    <Style Selector="Button">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Grid Background="Transparent" Name="grid">
+              <ContentPresenter x:Name="CloseButtonTemp" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}"/>
+            </Grid>
+            
+          </ControlTemplate>
+        </Setter.Value>
+        
+      </Setter>
+      <Style Selector="^:pointerover /template/ ContentPresenter#CloseButtonTemp">
+       <Setter Property="Background" Value="#11000000"/>
+      </Style>
+    </Style>
+    <Style Selector="Button:pointerover /template/ ContentPresenter#CloseButtonTemp">
+      <Setter Property="Background" Value="#11000000"/>
+    </Style>
+  </Window.Styles>
+ 
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="40"/>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+
+    <ContentControl Grid.RowSpan="2" Content="{Binding ContentView}"/>
+    <Border Height="10" VerticalAlignment="Top" Background="#4874DE"/>
+
+
+    <Grid HorizontalAlignment="Center" Margin="0,5,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+      </Grid.ColumnDefinitions>
+
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,20,0">
+        <RadioButton Content="系统首页" Command="{Binding MenuCommand}" CommandParameter="FirstPage"/>
+        <RadioButton Content="实时监控" IsChecked="{Binding IsCheck}" Command="{Binding MenuCommand}" CommandParameter="MonitorPage"/>
+        <RadioButton Content="原料监控" Command="{Binding MenuCommand}" CommandParameter="FirstPage"/>
+        <RadioButton Content="质量监控" Command="{Binding MenuCommand}" CommandParameter="FirstPage"/>
+      </StackPanel>
+      <!--扩展：对象的变形  Transform-->
+      <Path Data="M0 0 5 0 15 15 10 15z" Fill="#3B7BE7" Stretch="Fill" Grid.Column="1"
+            Margin="0,5" Opacity="0.2"/>
+      <Path Data="M0 0 5 0 15 15 10 15z" Fill="#3B7BE7" Stretch="Fill" Grid.Column="2" Margin="0,5" Opacity="0.5"/>
+      <Path Data="M0 0 5 0 15 15 10 15z" Fill="#3B7BE7" Stretch="Fill" Grid.Column="3" Margin="0,5"/>
+
+
+      <Border Background="{StaticResource titleBack}" Grid.Column="5" Margin="-0.1,0">
+        <TextBlock Text="区域远程监测运营管理平台" Foreground="White" FontSize="16"
+                       VerticalAlignment="Center" Margin="15,0,15,3" FontWeight="Bold"/>
+      </Border>
+      <!--微语言-->
+      <Path Data="M0 0 A5 5,0,0,1,5,3L13 31 A5 5 0 0 0 17 35L17 0z"
+            Fill="{StaticResource titleBack}"  Grid.Column="4">
+        <!--图像   像素损失-->
+      </Path>
+
+      <Path Data="M0 0 0 35 A5 5 0 0 0 5 32L 13 3 A5 5 0 0 1 17 0z" Fill="{StaticResource titleBack}" Grid.Column="6"/>
+      <Path Data="M0 5 5 5 15 0 10 0z" Fill="#3B7BE7" Stretch="Fill" Grid.Column="7" Margin="0,5"/>
+      <Path Data="M0 5 5 5 15 0 10 0z" Fill="#3B7BE7" Stretch="Fill" Grid.Column="8" Margin="0,5" Opacity="0.5"/>
+      <Path Data="M0 5 5 5 15 0 10 0z" Fill="#3B7BE7" Stretch="Fill" Grid.Column="9" Margin="0,5" Opacity="0.2"/>
+
+
+      <StackPanel Orientation="Horizontal" Grid.Column="10" VerticalAlignment="Center" Margin="20,0,0,0">
+        <RadioButton Content="项目信息" Command="{Binding MenuCommand}" CommandParameter="FirstPage"/>
+        <RadioButton Content="统计分析" Command="{Binding MenuCommand}" CommandParameter="FirstPage"/>
+        <RadioButton Content="基础数据" Command="{Binding MenuCommand}" CommandParameter="FirstPage"/>
+        <RadioButton Content="视频监控" Command="{Binding MenuCommand}" CommandParameter="FirstPage"/>
+      </StackPanel>
+    </Grid>
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+      <Image VerticalAlignment="Center" HorizontalAlignment="Left" Source="../Assets/Images/Logo.png" Height="22" Margin="10,0"/>
+      <TextBlock Text="GisAvalonia" VerticalAlignment="Center" Foreground="#AAA"/>
+    </StackPanel>
+   
+                      
+                 
+    <Button Content="×" x:Name="CloseButtonTemp" HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="30"
+                          FontWeight="Bold" Foreground="#3B7BE7" Opacity="0.6" Margin="5,0" FontSize="18"
+                       Click="Button_Click"
+                       ></Button>
+   
+  </Grid>
+</Window>

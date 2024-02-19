@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaComponents.Components.WarningLight">
+  <Viewbox>
+   
+    <StackPanel>
+      <Border Width="40" Height="10" CornerRadius="7,7,0,0" Background="#DDD"/>
+      <Border Width="40" Height="50" Name="borFault">
+        <Border.Effect>
+          <DropShadowEffect BlurRadius="30" Color="#FFFF3737"
+                            Opacity="0"/>
+        </Border.Effect>
+        <Border.Background>
+          <SolidColorBrush Color="#FFBF1919" />
+        </Border.Background>
+      </Border>
+      <Border Width="40" Height="50">
+        <Border.Effect>
+          <DropShadowEffect BlurRadius="30" Color="#FFFFC065"
+                             Opacity="0"/>
+        </Border.Effect>
+        <Border.Background>
+          <SolidColorBrush Color="#FFC99A1C"/>
+        </Border.Background>
+      </Border>
+      <Border Width="40" Height="50">
+        <Border.Effect>
+          <DropShadowEffect BlurRadius="30" Color="#FF23C12A" 
+                            Opacity="0"/>
+        </Border.Effect>
+        <Border.Background>
+          <SolidColorBrush Color="Green" />
+        </Border.Background>
+      </Border>
+      <Border Width="40" Height="10" CornerRadius="0,0,7,7" Background="#DDD"/>
+    </StackPanel>
+  </Viewbox>
+</UserControl>

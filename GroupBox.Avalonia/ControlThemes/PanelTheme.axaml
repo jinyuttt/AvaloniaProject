@@ -1,0 +1,33 @@
+<Styles   x:Class="GroupBox.Avalonia.ControlThemes.PanelTheme"
+           xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:conv="clr-namespace:GroupBox.Avalonia.Converters;assembly=GroupBox.Avalonia"
+        xmlns:gbac="using:GroupBox.Avalonia.Controls">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <!-- Add Controls for Previewer Here -->
+    </Border>
+  </Design.PreviewWith>
+
+  <!-- Add Styles Here -->
+  <Style Selector="gbac|GroupBox">
+    <Setter Property="Margin" Value="5"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="gbac:GroupBox">
+          <Border CornerRadius="5" BorderBrush="#006DA0" BorderThickness="0,1,0,0" Background="#55E1F5FF">
+            <Grid Background="Transparent">
+              <ContentPresenter Content="{TemplateBinding Content}"/>
+
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Border Background="#18EBED" Width="2" Height="15"/>
+                <TextBlock Text="{Binding Header,RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                       Foreground="#006DA0" Margin="10"/>
+              </StackPanel>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</Styles>
