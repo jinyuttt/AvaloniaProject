@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HyperText.Avalonia", "Hyper
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.MapView", "Mapsui.UI.MapView\Mapsui.UI.MapView.csproj", "{5C39004F-93CC-44FA-A6EC-62DA5B3EEB59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaComponents", "AvaloniaComponents\AvaloniaComponents.csproj", "{85B031F3-0E38-463E-B9F4-EC622DD00313}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaComponents", "AvaloniaComponents\AvaloniaComponents.csproj", "{85B031F3-0E38-463E-B9F4-EC622DD00313}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavAvalonia", "NavAvalonia\NavAvalonia.csproj", "{D7A338EA-AC17-42B0-9AC1-C9094131C993}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NavAvalonia", "NavAvalonia\NavAvalonia.csproj", "{D7A338EA-AC17-42B0-9AC1-C9094131C993}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapAvalonia", "MapAvalonia\MapAvalonia.csproj", "{9BC0804E-FE99-4C9D-AF70-36AFBDB57098}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{D7A338EA-AC17-42B0-9AC1-C9094131C993}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7A338EA-AC17-42B0-9AC1-C9094131C993}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7A338EA-AC17-42B0-9AC1-C9094131C993}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BC0804E-FE99-4C9D-AF70-36AFBDB57098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BC0804E-FE99-4C9D-AF70-36AFBDB57098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BC0804E-FE99-4C9D-AF70-36AFBDB57098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BC0804E-FE99-4C9D-AF70-36AFBDB57098}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

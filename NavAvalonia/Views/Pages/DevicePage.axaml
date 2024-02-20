@@ -64,6 +64,7 @@
       </ItemsControl.ItemsPanel>
       <ItemsControl.ItemTemplate>
         <DataTemplate DataType="vm:DeviceItemModel">
+          <ScrollViewer>
           <Grid Width="220">
             <Grid.RowDefinitions>
               <RowDefinition Height="220"/>
@@ -137,6 +138,7 @@
               </ItemsControl>
             </Border>
           </Grid>
+          </ScrollViewer>
         </DataTemplate>
       </ItemsControl.ItemTemplate>
     </ItemsControl>
