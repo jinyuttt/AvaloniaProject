@@ -6,6 +6,9 @@ using Mapsui;
 using Mapsui.UI.Avalonia;
 using Mapsui.UI;
 using Mapsui.Extensions;
+using Microsoft.Extensions.Logging;
+using System;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MapAvalonia.Views
 {
@@ -13,8 +16,11 @@ namespace MapAvalonia.Views
     {
         public MainWindow()
         {
+           
             InitializeComponent();
+            AttachMapsuiLogging();
             Init();
+           
         }
         private void Init()
         {
@@ -46,6 +52,14 @@ namespace MapAvalonia.Views
             mapControl.Refresh();
           
 
+        }
+        public  void AttachMapsuiLogging()
+        {
+            Mapsui.Logging.Logger.LogDelegate += (level, message, ex) =>
+            {
+                Console.WriteLine($"{message} {ex?.Message}"); // <-- Put a break point here, most UI platforms do not show the console logging.
+                                                               // todo: Forward to your own logger
+            };
         }
     }
 }
