@@ -3,12 +3,13 @@ using MapAvalonia.MapTools;
 using MapAvalonia.Models;
 using Mapsui.Projections;
 using Mapsui;
-using Mapsui.UI.Avalonia;
-using Mapsui.UI;
-using Mapsui.Extensions;
-using Microsoft.Extensions.Logging;
 using System;
-using Microsoft.Extensions.DependencyInjection;
+using Mapsui.Styles;
+using Mapsui.Logging;
+using Mapsui.Extensions;
+using Mapsui.Widgets.Zoom;
+using Mapsui.Utilities;
+using Mapsui.Tiling.Layers;
 
 namespace MapAvalonia.Views
 {
@@ -22,37 +23,62 @@ namespace MapAvalonia.Views
             Init();
            
         }
-        private void Init()
+        private async void Init()
         {
+            using var geometryLayer = MapSource.CreateWorldCitiesLayer();
+            var extent = geometryLayer.Extent!.Grow(10000);
 
+          var _titlelayer=  MapSource.CreateTileLayer();
 
-            mapControl.Map.CRS = "EPSG:3857";
-            mapControl.Map.Layers.Add(MapSource.CreateTileLayer());
-            mapControl.Map.Navigator.RotationLock = false;
+           // var titlelayer = await MapSource.CreateLayerAsync();
+            var map = new Map
+            {
+                
+                CRS = "EPSG:3857", // The Map CRS needs to be set
+                BackColor = Color.Gray
+            };
+            mapControl.Map = map;
+          
+                
+           map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+            map.Layers.Add(_titlelayer);
+            map.Layers.Add(geometryLayer);
+            map.Navigator.ZoomToBox(extent);
+            map.Navigator.RotationLock = false;
             mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
-            var extent = mapControl.Map.Layers[0].Extent!.Grow(mapControl.Map.Layers[0].Extent!.Width * 0.1);
-            mapControl.Map.Navigator.ZoomToBox(extent);
-           
-            //
-           // var point = SphericalMercator.FromLonLat( 25.04505, 102.70734);
-          //  mapControl.Map.Navigator.CenterOnAndZoomTo(point.ToMPoint(), 8);
-            //var point = SphericalMercator.FromLonLat(15.01917, 46.58806);
+          
+          
+            map.Navigator.ViewportChanged += (s, e) =>
+            {
+              
+                (var lon, var lat) = SphericalMercator.ToLonLat(map.Navigator.Viewport.CenterX, map.Navigator.Viewport.CenterY);
 
-            //map.Home = n => n.NavigateTo(new MPoint(point.x, point.y), map.Resolutions[12]);  //0 zoomed out-19 zoomed in
+                Logger.Log(LogLevel.Information, $"Map center at {lat:0.000}/{lon:0.000}");
+            };
+            map.Home = (n) =>
+            {
+                var box = new MRect(10340390, 7554750, 10340735, 7554670);
 
-            //var line = new Mapsui.UI.Maui.Polyline { StrokeWidth = 150, StrokeColor = Mapsui.UI.Maui.KnownColor.Red, IsClickable = true };
-            //line.Positions.Add(new Position(point.x, point.y));
-            //line.Positions.Add(new Position(point.x + 1, point.y - 1));.Home = n => n.NavigateTo(new MPoint(point.x, point.y), map.Resolutions[12]);  //0 zoomed out-19 zoomed in
+                double resolution = ZoomHelper.CalculateResolutionForWorldSize(box.Width, box.Height,
+                    map.Navigator.Viewport.Width, map.Navigator.Viewport.Height, MBoxFit.Fit);
+                var p = box.Centroid;
+                long d = 300;//-1;
+                             //resolution = 1;
+                map.Navigator.CenterOnAndZoomTo(p, resolution, d);
+            };
+            //var extent = mapControl.Map.Layers[0].Extent!.Grow(mapControl.Map.Layers[0].Extent!.Width * 0.1);
+            //mapControl.Map.Navigator.ZoomToBox(extent);
 
-            //var line = new Mapsui.UI.Maui.Polyline { StrokeWidth = 150, StrokeColor = Mapsui.UI.Maui.KnownColor.Red, IsClickable = true };
-            //line.Positions.Add(new Position(point.x, point.y));
-            //line.Positions.Add(new Position(point.x + 1, point.y - 1));
-            //
+            
 
             mapControl.Refresh();
           
 
         }
+
+       
+        
+
         public  void AttachMapsuiLogging()
         {
             Mapsui.Logging.Logger.LogDelegate += (level, message, ex) =>
@@ -60,6 +86,12 @@ namespace MapAvalonia.Views
                 Console.WriteLine($"{message} {ex?.Message}"); // <-- Put a break point here, most UI platforms do not show the console logging.
                                                                // todo: Forward to your own logger
             };
+        }
+
+        private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+          var mr=  SphericalMercator.FromLonLat(116.322373, 40.002694).ToMPoint();
+            mapControl.Map.Navigator.CenterOnAndZoomTo(mr,10);
         }
     }
 }

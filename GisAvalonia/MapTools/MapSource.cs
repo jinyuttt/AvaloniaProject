@@ -1,31 +1,97 @@
-﻿using BruTile.Predefined;
+﻿using BruTile;
+using BruTile.Cache;
+using BruTile.Predefined;
+using BruTile.Web;
 using Mapsui;
 using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
+using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI.Avalonia;
+using Mapsui.Tiling.Rendering;
 using System;
 using System.Collections.ObjectModel;
-using System.Net.Http;
+using System.IO;
 using System.Threading.Tasks;
 
-namespace GisAvalonia.MapTools
+namespace MapAvalonia.MapTools
 {
     internal class MapSource
     {
-        public MapSource(MapControl mapControl) {
-            MapControlTool.mapControl = mapControl;
-            MapControlTool.Init();
-        }
-        public ILayer Req()
+       
+        public static IPersistentCache<byte[]>? DefaultCache;
+        private static readonly BruTile.Attribution _openStreetMapAttribution = new(
+        "© OpenStreetMap contributors", "https://www.openstreetmap.org/copyright");
+       static ITileSource _tileSource = null;
+        public static TileLayer CreateTileLayer(string? userAgent = null)
         {
-            var httpClient = new HttpClient();
-             string url = "http://wprd01.is.autonavi.com/appmaptile?x={0}&y={1}&z={2}&lang=zh_cn&size=1&scl=1&style=7";
-           // string url = "http://online3.map.bdimg.com/onlinelabel/?qt=tile&x={0}&y={1}&z={2}&styles=pl&udt=20200727&scaler=1&p=1";
-            var osmSource = new HttpClientTileSource(httpClient, new GlobalSphericalMercator(), url);
+            userAgent ??= $"user-agent-of-{Path.GetFileNameWithoutExtension(System.AppDomain.CurrentDomain.FriendlyName)}";
 
-            var osmLayer = new TileLayer(osmSource) { Name = "高德地图" };
-            return osmLayer;
+            _tileSource = CreateTileSource(userAgent);
+          
+            return new TileLayer(_tileSource, 200,500,new MinimalDataFetchStrategy(),new MinimalRenderFetchStrategy()) { Name = "高德",   IsMapInfoLayer=true  };
+        }
+       
+       
+       
+
+        private static HttpTileSource CreateTileSource(string userAgent)
+        {
+
+            
+            //  string url = "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";//arcgis影像
+           
+            string url = "https://rt2.map.gtimg.com/realtimerender?z={z}&x={x}&y={y}&type=vector&style=0";//腾讯
+           // url = "https://rt2.map.gtimg.com/tile?z={z}&x={x}&y={y}&type=vector&styleid=3&version=376";//腾讯底图
+            url = "https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}"; //ArcGIS Server发布的WMTS地图服务
+            return new HttpTileSource(new GlobalSphericalMercator() { Srs= "EPSG:3857" },
+                url,
+                name: "高德",
+                attribution: _openStreetMapAttribution, userAgent: userAgent, persistentCache: DefaultCache);
+        }
+        public static Layer CreateWorldCitiesLayer()
+        {
+
+            var features = WorldCitiesFeaturesBuilder.CreateTop100Cities();
+            var memoryProvider = new MemoryProvider(features)
+            {
+                CRS = "EPSG:4326" // The DataSource CRS needs to be set
+            };
+
+            var dataSource = new ProjectingProvider(memoryProvider)
+            {
+                CRS = "EPSG:3857"
+            };
+
+            return new Layer
+            {
+                DataSource = dataSource,
+                Name = "Cities",
+                Style = CreateCityStyle(),
+                IsMapInfoLayer = true
+            };
+        }
+
+       
+
+       
+
+        
+        private static SymbolStyle CreateCityStyle()
+        {
+
+            // var location = typeof(GeodanOfficesLayerBuilder).LoadBitmapId("Images.location.png");
+
+
+            return new SymbolStyle
+            {
+                //  BitmapId = location,
+                SymbolOffset = new Offset { Y = 64 },
+                SymbolScale = 0.25,
+                Opacity = 0.5f,
+                Fill = new Brush(new Color(200, 40, 40))
+            };
         }
         private  MemoryLayer CreateRandomPointLayer()
         {
@@ -54,15 +120,10 @@ namespace GisAvalonia.MapTools
 
             return layer;
         }
-        public  void TestMap()
-        {
-            MapControlTool.AddLayer(Req());
-        }
 
-        public  void TestLine()
-        {
-            MapControlTool.AddLayer(CreateRandomPointLayer());
-          
-        }
+
+       
+      
+
     }
 }

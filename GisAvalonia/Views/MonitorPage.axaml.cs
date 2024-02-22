@@ -1,49 +1,82 @@
 using Avalonia.Controls;
-using BruTile.Predefined;
-using GisAvalonia.MapTools;
+using MapAvalonia.MapTools;
+using Mapsui;
+using Mapsui.Logging;
+using Mapsui.Projections;
 using Mapsui.Samples.CustomWidget;
-using Mapsui.Tiling.Layers;
-using Mapsui.UI.Avalonia;
-using Mapsui.Widgets.ScaleBar;
-using System.Net.Http;
+using Mapsui.Styles;
+using Mapsui.Utilities;
+using Mapsui.Widgets.Zoom;
 
 namespace GisAvalonia.Views
 {
     public partial class MonitorPage : UserControl
     {
-        private const string uul = "http://developer.baidu.com/map/jsdemo.htm#a1_2";
-        static readonly string UrlFormat = "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={0}&y={1}&z={2}";
+      
         public MonitorPage()
         {
             InitializeComponent();
 
             this.DataContext = new ViewModels.MonitorViewModel();
-            //  Init();
-            var httpClient = new HttpClient();
-            string url = "http://wprd01.is.autonavi.com/appmaptile?x={0}&y={1}&z={2}&lang=zh_cn&size=1&scl=1&style=7";
-            // string url = "http://online3.map.bdimg.com/onlinelabel/?qt=tile&x={0}&y={1}&z={2}&styles=pl&udt=20200727&scaler=1&p=1";
-          
-            var osmSource = new HttpClientTileSource(httpClient, new GlobalSphericalMercator(), UrlFormat);
 
-            var osmLayer = new TileLayer(osmSource) { Name = "¸ßµÂµØÍ¼" };
-            map.Map.Widgets.Enqueue(new ScaleBarWidget(map.Map) { TextAlignment = Mapsui.Widgets.Alignment.Center, HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top });
-            map.Map.Widgets.Enqueue(new Mapsui.Widgets.Zoom.ZoomInOutWidget { MarginX = 20, MarginY = 40 });
-            map.Map.Navigator.RotationLock = false;
-            map.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
-            map.Map.Layers.Add(osmLayer);
-            map.Map.Refresh();
+            Init();
 
         }
 
-      
-       
-        private void Init()
+
+
+        private async void Init()
         {
-            var cur = map;
-            var source=new  MapSource(cur);
-            source.TestMap();
-            source.TestLine();
+            using var geometryLayer = MapSource.CreateWorldCitiesLayer();
+            var extent = geometryLayer.Extent!.Grow(10000);
+
+            var _titlelayer = MapSource.CreateTileLayer();
+
+            // var titlelayer = await MapSource.CreateLayerAsync();
+            var map = new Map
+            {
+
+                CRS = "EPSG:3857", // The Map CRS needs to be set
+                BackColor = Color.Gray
+            };
+            mapControl.Map = map;
+
+
+            map.Widgets.Enqueue(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+            map.Layers.Add(_titlelayer);
+            map.Layers.Add(geometryLayer);
+            map.Navigator.ZoomToBox(extent);
+            map.Navigator.RotationLock = false;
+            mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
+
+
+            map.Navigator.ViewportChanged += (s, e) =>
+            {
+
+                (var lon, var lat) = SphericalMercator.ToLonLat(map.Navigator.Viewport.CenterX, map.Navigator.Viewport.CenterY);
+
+                Logger.Log(LogLevel.Information, $"Map center at {lat:0.000}/{lon:0.000}");
+            };
+            map.Home = (n) =>
+            {
+                var box = new MRect(10340390, 7554750, 10340735, 7554670);
+
+                double resolution = ZoomHelper.CalculateResolutionForWorldSize(box.Width, box.Height,
+                    map.Navigator.Viewport.Width, map.Navigator.Viewport.Height, MBoxFit.Fit);
+                var p = box.Centroid;
+                long d = 300;//-1;
+                             //resolution = 1;
+                map.Navigator.CenterOnAndZoomTo(p, resolution, d);
+            };
+            //var extent = mapControl.Map.Layers[0].Extent!.Grow(mapControl.Map.Layers[0].Extent!.Width * 0.1);
+            //mapControl.Map.Navigator.ZoomToBox(extent);
+
+
+
+            mapControl.Refresh();
+
 
         }
+
     }
 }

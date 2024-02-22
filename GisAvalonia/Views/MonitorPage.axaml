@@ -81,7 +81,7 @@
     <!--这里添加地图-->
   
      
-    <map:MapControl Name="map"   BorderBrush="AliceBlue" BorderThickness="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+    <map:MapControl Name="mapControl"   BorderBrush="AliceBlue" BorderThickness="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
      <map:MapControl.OpacityMask>
         <RadialGradientBrush SpreadMethod="Repeat"  Radius="">
           <RadialGradientBrush.GradientStops>

@@ -16,12 +16,14 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-  
-    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-      
-      <map:MapControl  x:Name="mapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-      
-    </Grid>
+
+  <Grid  ColumnDefinitions="Auto,*" >
+    <StackPanel  Width="80">
+      <Button  Click="Button_Click">测试</Button>
+    </StackPanel>
+    <map:MapControl Grid.Column="1"  x:Name="mapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+
+  </Grid>
 
   
 </Window>
