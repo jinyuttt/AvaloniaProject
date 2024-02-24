@@ -17,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaComponents", "Avalo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NavAvalonia", "NavAvalonia\NavAvalonia.csproj", "{D7A338EA-AC17-42B0-9AC1-C9094131C993}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapAvalonia", "MapAvalonia\MapAvalonia.csproj", "{9BC0804E-FE99-4C9D-AF70-36AFBDB57098}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapAvalonia", "MapAvalonia\MapAvalonia.csproj", "{9BC0804E-FE99-4C9D-AF70-36AFBDB57098}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaUI.Ribbon", "AvaloniaUI.Ribbon\AvaloniaUI.Ribbon.csproj", "{057A6C84-5D81-4C0C-9D36-96AC01AB9102}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonAvalonia", "RibbonAvalonia\RibbonAvalonia.csproj", "{271F2D44-4FE4-49A3-AF48-FF466540C417}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{9BC0804E-FE99-4C9D-AF70-36AFBDB57098}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BC0804E-FE99-4C9D-AF70-36AFBDB57098}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BC0804E-FE99-4C9D-AF70-36AFBDB57098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{057A6C84-5D81-4C0C-9D36-96AC01AB9102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{057A6C84-5D81-4C0C-9D36-96AC01AB9102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{057A6C84-5D81-4C0C-9D36-96AC01AB9102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{057A6C84-5D81-4C0C-9D36-96AC01AB9102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{271F2D44-4FE4-49A3-AF48-FF466540C417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{271F2D44-4FE4-49A3-AF48-FF466540C417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{271F2D44-4FE4-49A3-AF48-FF466540C417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{271F2D44-4FE4-49A3-AF48-FF466540C417}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

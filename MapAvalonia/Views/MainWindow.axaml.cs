@@ -7,9 +7,16 @@ using System;
 using Mapsui.Styles;
 using Mapsui.Logging;
 using Mapsui.Extensions;
-using Mapsui.Widgets.Zoom;
+
 using Mapsui.Utilities;
-using Mapsui.Tiling.Layers;
+using Mapsui.Widgets;
+using Mapsui.Widgets.MouseCoordinatesWidget;
+using Mapsui.Widgets.PerformanceWidget;
+using Mapsui.Widgets.BoxWidget;
+using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ScaleBar;
+using Mapsui.Widgets.Zoom;
+using BruTile;
 
 namespace MapAvalonia.Views
 {
@@ -19,10 +26,17 @@ namespace MapAvalonia.Views
         {
            
             InitializeComponent();
+            titleBar.OnPointerMouseHander += TitleBar_OnPointerMouseHander;
             AttachMapsuiLogging();
             Init();
            
         }
+
+        private void TitleBar_OnPointerMouseHander(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+        {
+           this.BeginMoveDrag(e);
+        }
+
         private async void Init()
         {
             using var geometryLayer = MapSource.CreateWorldCitiesLayer();
@@ -38,9 +52,22 @@ namespace MapAvalonia.Views
                 BackColor = Color.Gray
             };
             mapControl.Map = map;
-          
-                
-           map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+            mapControl.Performance = new Performance();
+
+            map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+         
+        //   map.Widgets.Add(new BoxWidget { MarginX = 20, MarginY = 40, Width=40 });
+        //   map.Widgets.Add(new ButtonWidget { MarginX = 20, MarginY = 40,  Text= "≤‚ButtonWidget" });
+          //  map.Widgets.Add(new ScaleBarWidget(map) { MarginX = 20, MarginY = 40 });
+            //  map.Widgets.Add(new HyperlinkWidget { MarginX = 20, MarginY = 40 });
+            // map.Widgets.Add(new IconButtonWidget { MarginX = 20, MarginY = 40 });
+            //   map.Widgets.Add(new TextButtonWidget { MarginX = 20, MarginY = 40 });
+           
+           
+            map.Widgets.Add(new MapInfoWidget(map) { MarginX = 20, MarginY = 40 , Text= "Œ“‘⁄≤‚ ‘MapInfoWidget", FeatureToText=AcText });
+            map.Widgets.Add(new MouseCoordinatesWidget(map) {  HorizontalAlignment=Mapsui.Widgets.HorizontalAlignment.Right, VerticalAlignment= Mapsui.Widgets.VerticalAlignment.Bottom, Width=100, Height=20, MarginX = 20, MarginY = 10 , BackColor=Color.Green,  Text= "MouseCoordinatesWidget" });
+       //  map.Widgets.Add(new PerformanceWidget(mapControl.Performance) { MarginX = 20, MarginY = 40 });
+          //  map.Widgets.Add(new TextButtonWidget { MarginX = 20, MarginY = 40 });
             map.Layers.Add(_titlelayer);
             map.Layers.Add(geometryLayer);
             map.Navigator.ZoomToBox(extent);
@@ -76,8 +103,10 @@ namespace MapAvalonia.Views
 
         }
 
-       
-        
+        private string AcText(IFeature? feature)
+        {
+            return "12345";
+        }
 
         public  void AttachMapsuiLogging()
         {

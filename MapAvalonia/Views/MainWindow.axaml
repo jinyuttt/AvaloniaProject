@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MapAvalonia.Views.MainWindow"
-       xmlns:map="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
+         xmlns:map="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
         x:DataType="vm:MainWindowViewModel"
+        ExtendClientAreaChromeHints="NoChrome"
+         ExtendClientAreaTitleBarHeightHint="-1"
+       ExtendClientAreaToDecorationsHint="True"
+        Background="#6590C1"
+        xmlns:titlebars="clr-namespace:AvaloniaComponents.Components;assembly=AvaloniaComponents"
         Icon="/Assets/avalonia-logo.ico"
         Title="MapAvalonia">
 
@@ -16,14 +21,20 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
+  <DockPanel  HorizontalAlignment="Stretch"
+           VerticalAlignment="Stretch"
+           Name="ContentWrapper">
+    <titlebars:WindowsTitleBar DockPanel.Dock="Top" IsSeamless="True"  Name="titleBar"   Background="{Binding $parent}" BorderBrush="rgb(196,230,255)"> </titlebars:WindowsTitleBar>
 
-  <Grid  ColumnDefinitions="Auto,*" >
+    <Grid  ColumnDefinitions="Auto,*" >
     <StackPanel  Width="80">
       <Button  Click="Button_Click">测试</Button>
     </StackPanel>
     <map:MapControl Grid.Column="1"  x:Name="mapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
 
-  </Grid>
+    </Grid>
+  </DockPanel>
+  
 
   
 </Window>

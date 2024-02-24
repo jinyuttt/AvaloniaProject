@@ -7,8 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\avalonia-logo.ico" />
+    <None Remove="Assets\Images\Icon.ico" />
+    <None Remove="Assets\Images\Icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.9" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.9" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Components\WindowsTitleBar.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\avalonia-logo.ico" />
+    <AvaloniaResource Include="Assets\Images\Icon.ico" />
+    <AvaloniaResource Include="Assets\Images\Icon.png" />
   </ItemGroup>
 
 </Project>
