@@ -1,4 +1,7 @@
-﻿using Mapsui.Layers;
+﻿using MapAvalonia.Models;
+using Mapsui.Layers;
+using Mapsui.Styles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -117,12 +120,82 @@ public class WorldCitiesFeaturesBuilder
             {
                 ["NAME"] = item.CityName,
                 ["COUNTRY"] = item.Country,
-                ["POPULATION"] = item.Population
-                
+                ["POPULATION"] = item.Population,
+                 Styles = CreateStyle(),
+                 RenderedGeometry= CreateRenderedStyle()
+
             })
             .ToList();
     }
+    private static Dictionary<IStyle,Object> CreateRenderedStyle()
+    {
+        Dictionary<IStyle, Object> keys = new Dictionary<IStyle,Object>();
+        keys.Add(new CustomStyle() { Properties = new Dictionary<string, string> { } },nameof(CustomStyle));
+        return keys;
 
+    }
+    private static IList<IStyle> CreateStyle()
+    {
+        List<IStyle> symbolStyles = new List<IStyle>();
+        //symbolStyles.Add(new SymbolStyle
+        //{
+        //    SymbolScale = 2.0f,
+        //    Fill = null,
+        //    Outline = new Pen { Color = Color.Yellow }
+        //});
+
+        //symbolStyles.Add(new SymbolStyle
+        //{
+        //    SymbolScale = 0.8f,
+        //    Fill = new Brush { Color = Color.Red }
+        //});
+
+        //symbolStyles.Add(new SymbolStyle
+        //{
+        //    SymbolScale = 0.5f,
+        //    Fill = new Brush { Color = Color.Black }
+        //});
+
+        //symbolStyles.Add(new LabelStyle
+        //{
+        //    Text = "Stacked Styles",
+        //    HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
+            
+             
+        //});
+        //symbolStyles.Add(new CalloutStyle
+        //{
+        //   Title= "CalloutStyle",
+        //   ArrowAlignment= ArrowAlignment.Top,
+            
+        //});
+        symbolStyles.Add(new CalloutStyle
+        {
+            Enabled = false,
+            Type = CalloutType.Single,
+            Title = "DDDD",
+            TitleFontColor = Styles.Color.Black,
+            ArrowAlignment = ArrowAlignment.Top,
+            ArrowPosition = 0,
+            SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
+            MaxWidth = 300,
+            RotateWithMap = true,
+            SymbolOffsetRotatesWithMap = true,
+            Color = Styles.Color.White,
+            StrokeWidth = 0,
+            ShadowWidth = 0,
+            
+        });
+        symbolStyles.Add(new CustomStyle() { Properties=new Dictionary<string, string> { } });
+        //symbolStyles.Add(new VectorStyle
+        //{
+        //  //  Fill = new Brush(new Color(150, 150, 150, 240)),
+        //    Line = new Pen(new Color(150, 150, 150, 240), 3),
+        //   // Outline = new Pen(new Color(150, 150, 150, 240), 3)
+        //});
+        return symbolStyles;
+
+    }
     public class City
     {
         public string CityName { get; init; } = "";

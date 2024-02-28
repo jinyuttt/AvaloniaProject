@@ -133,7 +133,19 @@ namespace MapAvalonia.MapTools
         {
 
             // var location = typeof(GeodanOfficesLayerBuilder).LoadBitmapId("Images.location.png");
+            //return new CalloutStyle
+            //{
+            //    ArrowPosition = 0.5f,
 
+
+            //    Type = CalloutType.Custom,
+            //    ArrowAlignment = ArrowAlignment.Bottom,
+            //    SymbolOffset = new Offset { Y = 64 },
+            //    RectRadius = 10,
+            //    ShadowWidth = 4,
+            //    StrokeWidth = 0,
+            //    Fill = new Brush(new Color(200, 40, 40))
+            //};
 
             return new SymbolStyle
             {

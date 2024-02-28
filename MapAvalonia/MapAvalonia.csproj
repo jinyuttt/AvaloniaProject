@@ -28,6 +28,7 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.9" />
     <PackageReference Include="Mapsui" Version="4.1.4" />
     <PackageReference Include="Mapsui.Avalonia" Version="4.1.4" />
+    <PackageReference Include="Mapsui.Nts" Version="4.1.4" />
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />

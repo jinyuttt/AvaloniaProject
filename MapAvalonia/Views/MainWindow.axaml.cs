@@ -17,6 +17,7 @@ using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using BruTile;
+using System.Text;
 
 namespace MapAvalonia.Views
 {
@@ -44,7 +45,10 @@ namespace MapAvalonia.Views
 
           var _titlelayer=  MapSource.CreateTileLayer();
 
-           // var titlelayer = await MapSource.CreateLayerAsync();
+            var lineloygon = ComplexPolygon.CreateLineLayer();
+
+            var complexPolygon = ComplexPolygon.CreateLayer();
+            // var titlelayer = await MapSource.CreateLayerAsync();
             var map = new Map
             {
                 
@@ -55,26 +59,30 @@ namespace MapAvalonia.Views
             mapControl.Performance = new Performance();
 
             map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
-         
-        //   map.Widgets.Add(new BoxWidget { MarginX = 20, MarginY = 40, Width=40 });
-        //   map.Widgets.Add(new ButtonWidget { MarginX = 20, MarginY = 40,  Text= "²âButtonWidget" });
-          //  map.Widgets.Add(new ScaleBarWidget(map) { MarginX = 20, MarginY = 40 });
+
+            //   map.Widgets.Add(new BoxWidget { MarginX = 20, MarginY = 40, Width=40 });
+            //   map.Widgets.Add(new ButtonWidget { MarginX = 20, MarginY = 40,  Text= "²âButtonWidget" });
+            //  map.Widgets.Add(new ScaleBarWidget(map) { MarginX = 20, MarginY = 40 });
             //  map.Widgets.Add(new HyperlinkWidget { MarginX = 20, MarginY = 40 });
             // map.Widgets.Add(new IconButtonWidget { MarginX = 20, MarginY = 40 });
             //   map.Widgets.Add(new TextButtonWidget { MarginX = 20, MarginY = 40 });
-           
-           
+         
+
+
             map.Widgets.Add(new MapInfoWidget(map) { MarginX = 20, MarginY = 40 , Text= "ÎÒÔÚ²âÊÔMapInfoWidget", FeatureToText=AcText });
-            map.Widgets.Add(new MouseCoordinatesWidget(map) {  HorizontalAlignment=Mapsui.Widgets.HorizontalAlignment.Right, VerticalAlignment= Mapsui.Widgets.VerticalAlignment.Bottom, Width=100, Height=20, MarginX = 20, MarginY = 10 , BackColor=Color.Green,  Text= "MouseCoordinatesWidget" });
+            map.Widgets.Add(new MyMouseCoordinatesWidget(map) {  HorizontalAlignment=Mapsui.Widgets.HorizontalAlignment.Right, VerticalAlignment= Mapsui.Widgets.VerticalAlignment.Bottom, Width=100, Height=20, MarginX = 20, MarginY = 10 , BackColor=Color.Green,  Text= "MouseCoordinatesWidget" });
        //  map.Widgets.Add(new PerformanceWidget(mapControl.Performance) { MarginX = 20, MarginY = 40 });
           //  map.Widgets.Add(new TextButtonWidget { MarginX = 20, MarginY = 40 });
-            map.Layers.Add(_titlelayer);
+           map.Layers.Add(_titlelayer);
             map.Layers.Add(geometryLayer);
+            map.Layers.Add(lineloygon);
             map.Navigator.ZoomToBox(extent);
             map.Navigator.RotationLock = false;
-            mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
-          
-          
+         //   map.Navigator.CenterOnAndZoomTo(lineloygon.Extent!.Centroid, map.Navigator.Resolutions[15]);
+            // mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
+
+            mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());
+
             map.Navigator.ViewportChanged += (s, e) =>
             {
               
@@ -95,14 +103,33 @@ namespace MapAvalonia.Views
             };
             //var extent = mapControl.Map.Layers[0].Extent!.Grow(mapControl.Map.Layers[0].Extent!.Width * 0.1);
             //mapControl.Map.Navigator.ZoomToBox(extent);
-
-            
-
+            map.Info += Map_Info;
+            mapControl.FeatureInfo += MapControl_FeatureInfo;
+         
+           
             mapControl.Refresh();
           
 
         }
 
+        
+
+        private void MapControl_FeatureInfo(object? sender, FeatureInfoEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Map_Info(object? sender, MapInfoEventArgs e)
+        {
+            
+        }
+        //public static string ToStringOfKeyValuePairs(this IFeature feature)
+        //{
+        //    var stringBuilder = new StringBuilder();
+        //    foreach (var field in feature.Fields)
+        //        stringBuilder.Append($"{field}: {feature[field]}\n");
+        //    return stringBuilder.ToString();
+        //}
         private string AcText(IFeature? feature)
         {
             return "12345";
