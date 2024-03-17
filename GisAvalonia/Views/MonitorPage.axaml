@@ -298,7 +298,7 @@
                 <TextBlock Text="按月统计" VerticalAlignment="Center" Margin="10,0"/>
               </StackPanel>
               <UniformGrid Grid.Row="1" Rows="1" Margin="0,5,0,0">
-                <Border Width="16" Background="#1000" CornerRadius="3">
+                <Border Width="16" Background="#1000"  CornerRadius="3">
                   <Border Background="{StaticResource chartsBackground}" Height="20" VerticalAlignment="Bottom" CornerRadius="3"/>
                 </Border>
                 <Border Width="16" Background="#1000" CornerRadius="3">

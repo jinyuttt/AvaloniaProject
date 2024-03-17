@@ -11,17 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GisAvalonia", "GisAvalonia\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HyperText.Avalonia", "HyperText.Avalonia\HyperText.Avalonia.csproj", "{6979D79B-0C3D-48E8-A979-C1ACF61E8762}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.MapView", "Mapsui.UI.MapView\Mapsui.UI.MapView.csproj", "{5C39004F-93CC-44FA-A6EC-62DA5B3EEB59}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaComponents", "AvaloniaComponents\AvaloniaComponents.csproj", "{85B031F3-0E38-463E-B9F4-EC622DD00313}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NavAvalonia", "NavAvalonia\NavAvalonia.csproj", "{D7A338EA-AC17-42B0-9AC1-C9094131C993}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapAvalonia", "MapAvalonia\MapAvalonia.csproj", "{9BC0804E-FE99-4C9D-AF70-36AFBDB57098}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaUI.Ribbon", "AvaloniaUI.Ribbon\AvaloniaUI.Ribbon.csproj", "{057A6C84-5D81-4C0C-9D36-96AC01AB9102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaUI.Ribbon", "AvaloniaUI.Ribbon\AvaloniaUI.Ribbon.csproj", "{057A6C84-5D81-4C0C-9D36-96AC01AB9102}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonAvalonia", "RibbonAvalonia\RibbonAvalonia.csproj", "{271F2D44-4FE4-49A3-AF48-FF466540C417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RibbonAvalonia", "RibbonAvalonia\RibbonAvalonia.csproj", "{271F2D44-4FE4-49A3-AF48-FF466540C417}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +43,6 @@ Global
 		{6979D79B-0C3D-48E8-A979-C1ACF61E8762}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6979D79B-0C3D-48E8-A979-C1ACF61E8762}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6979D79B-0C3D-48E8-A979-C1ACF61E8762}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C39004F-93CC-44FA-A6EC-62DA5B3EEB59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C39004F-93CC-44FA-A6EC-62DA5B3EEB59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C39004F-93CC-44FA-A6EC-62DA5B3EEB59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C39004F-93CC-44FA-A6EC-62DA5B3EEB59}.Release|Any CPU.Build.0 = Release|Any CPU
 		{85B031F3-0E38-463E-B9F4-EC622DD00313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{85B031F3-0E38-463E-B9F4-EC622DD00313}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85B031F3-0E38-463E-B9F4-EC622DD00313}.Release|Any CPU.ActiveCfg = Release|Any CPU

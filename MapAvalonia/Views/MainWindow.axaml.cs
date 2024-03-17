@@ -70,7 +70,7 @@ namespace MapAvalonia.Views
 
 
             map.Widgets.Add(new MapInfoWidget(map) { MarginX = 20, MarginY = 40 , Text= "Œ“‘⁄≤‚ ‘MapInfoWidget", FeatureToText=AcText });
-            map.Widgets.Add(new MyMouseCoordinatesWidget(map) {  HorizontalAlignment=Mapsui.Widgets.HorizontalAlignment.Right, VerticalAlignment= Mapsui.Widgets.VerticalAlignment.Bottom, Width=100, Height=20, MarginX = 20, MarginY = 10 , BackColor=Color.Green,  Text= "MouseCoordinatesWidget" });
+            map.Widgets.Add(new MouseCoordinatesWidget(map) {  HorizontalAlignment=Mapsui.Widgets.HorizontalAlignment.Right, VerticalAlignment= Mapsui.Widgets.VerticalAlignment.Bottom, Width=100, Height=20, MarginX = 20, MarginY = 10 , BackColor=Color.Green,  Text= "MouseCoordinatesWidget" });
        //  map.Widgets.Add(new PerformanceWidget(mapControl.Performance) { MarginX = 20, MarginY = 40 });
           //  map.Widgets.Add(new TextButtonWidget { MarginX = 20, MarginY = 40 });
            map.Layers.Add(_titlelayer);
