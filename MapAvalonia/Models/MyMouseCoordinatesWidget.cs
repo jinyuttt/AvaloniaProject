@@ -1,9 +1,8 @@
-﻿using Mapsui;
+﻿
+using Mapsui;
 using Mapsui.Extensions;
-using Mapsui.Styles;
 using Mapsui.Widgets;
-
-namespace MapAvalonia.Models
+namespace Mapsui.Widgets.MouseCoordinatesWidget
 {
     public class MyMouseCoordinatesWidget : TextBox, IWidgetExtended, IWidget
     {
@@ -13,7 +12,7 @@ namespace MapAvalonia.Models
             base.HorizontalAlignment = HorizontalAlignment.Center;
             base.VerticalAlignment = VerticalAlignment.Bottom;
             base.Text = "Mouse Position";
-            this.BackColor = Color.White;
+         
             Map = map;
         }
 
@@ -25,12 +24,12 @@ namespace MapAvalonia.Models
             return false;
         }
 
-        public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetArgs args)
+        public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetArgs args)
         {
             return false;
         }
 
-        public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetArgs args)
+        public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetArgs args)
         {
             return false;
         }
