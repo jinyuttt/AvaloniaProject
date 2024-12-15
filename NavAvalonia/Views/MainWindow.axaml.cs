@@ -9,6 +9,9 @@ namespace NavAvalonia.Views
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new MainWindowViewModel();
+
         }
 
         private void Grid_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)

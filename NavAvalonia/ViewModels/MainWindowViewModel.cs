@@ -8,8 +8,7 @@ namespace NavAvalonia.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-      
-
+     
         // 菜单 集合
         public ObservableCollection<MenuItemModel> TreeList
         {
@@ -26,7 +25,7 @@ namespace NavAvalonia.ViewModels
             {
                 MenuItemModel tim = new MenuItemModel();
                 tim.Header = "工艺设计";
-                //&#xe740;  XAML里使用
+                //&#xe740;  XAML里使用7
                 tim.IconCode = "\ue610"; // 字体图标编码，阿里的Iconfont平台打包的图标库
                 TreeList.Add(tim);
                 tim.Children.Add(new MenuItemModel
@@ -74,6 +73,7 @@ namespace NavAvalonia.ViewModels
             //Pages.Add("CCCC");
             //Pages.Add("DDDD");
             #endregion
+            Console.WriteLine("");
         }
         private void ClosePage(PageItemModel menu)
         {

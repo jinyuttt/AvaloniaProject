@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace GisAvalonia.Mqtt
 {
     internal class Mqtt
@@ -58,37 +59,37 @@ namespace GisAvalonia.Mqtt
 
         private static async Task _mqttServer_ApplicationMessageEnqueuedOrDroppedAsync(ApplicationMessageEnqueuedEventArgs arg)
         {
-            await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "MQ启动");
+           // await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "MQ启动");
         }
 
         private static async Task _mqttServer_ClientUnsubscribedTopicAsync(ClientUnsubscribedTopicEventArgs arg)
         {
-            await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "UnsubscribedTopic");
+           // await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "UnsubscribedTopic");
         }
 
         private static async Task MqttServer_ClientSubscribedTopicAsync(ClientSubscribedTopicEventArgs arg)
         {
-            await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "ClientSubscribedTopic");
+            //await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "ClientSubscribedTopic");
         }
 
         private static async Task _mqttServer_ClientDisconnectedAsync(ClientDisconnectedEventArgs arg)
         {
-            await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "ClientDisconnected");
+            //await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "ClientDisconnected");
         }
 
         private static async Task _mqttServer_ClientConnectedAsync(ClientConnectedEventArgs arg)
         {
-            await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "ClientConnected");
+           // await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "ClientConnected");
         }
 
         private static async Task OnMqttServerStopped(EventArgs args)
         {
-            await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "MqttServerStopped");
+           // await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "MqttServerStopped");
         }
 
         private static async Task OnMqttServerStart(EventArgs args)
         {
-            await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "MqttServerStart");
+            //await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "MqttServerStart");
         }
 
         public static  IMqttClient Client()
@@ -148,17 +149,17 @@ namespace GisAvalonia.Mqtt
 
         private static async Task _mqttClient_DisconnectedAsync(MqttClientDisconnectedEventArgs arg)
         {
-            await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "Client_Disconnected");
+           // await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "Client_Disconnected");
         }
 
         private static async Task _mqttClient_ConnectedAsync(MqttClientConnectedEventArgs arg)
         {
-             await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "_mqttClient_ConnectedAsync");
+            // await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "_mqttClient_ConnectedAsync");
         }
 
         private static async Task _mqttClient_ApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs arg)
         {
-            await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "_mqttClient_ApplicationMessageReceivedAsync");
+           // await Log.GisLog.Logger.LogAsync(Log.LogLevel.Info, "_mqttClient_ApplicationMessageReceivedAsync");
         }
 
         public static void PublishStringAsync(IMqttClient client, string topic, string message)

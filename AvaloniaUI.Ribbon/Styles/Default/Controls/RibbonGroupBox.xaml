@@ -68,7 +68,7 @@
             <ItemsPresenter x:Name="PART_ItemsPresenter" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="{TemplateBinding Padding}">
               <ItemsPresenter.ItemsPanel>
                 <ItemsPanelTemplate>
-                  <local:RibbonGroupWrapPanel x:Name="PART_ItemsPanel" DisplayMode="{TemplateBinding DisplayMode}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                  <local:RibbonGroupWrapPanel x:Name="PART_ItemsPanel"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </ItemsPanelTemplate>
               </ItemsPresenter.ItemsPanel>
             </ItemsPresenter>
