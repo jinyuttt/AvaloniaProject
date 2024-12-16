@@ -1,5 +1,5 @@
 using Avalonia.Controls;
-using CefNet.Avalonia;
+using Xilium.CefGlue.Avalonia;
 
 namespace GisAvalonia.Views
 {
@@ -8,10 +8,15 @@ namespace GisAvalonia.Views
         public FirstPage()
         {
             InitializeComponent();
-            WebView webview = new() { Focusable = true, Name= "webview"  };
-            web.Children.Add(webview); 
-            webview.BrowserCreated += (s, e) => webview.Navigate("https://www.bydauto.com.cn/pc/?ad_id=7");
+           // WebView webview = new() { Focusable = true, Name= "webview"  };
+           //  web.Children.Add(webview); 
+           //  webview.BrowserCreated += (s, e) => webview.Navigate("https://www.bydauto.com.cn/pc/?ad_id=7");
 
+            AvaloniaCefBrowser browser=new AvaloniaCefBrowser();
+            browser.Address = "https://www.bydauto.com.cn/pc/?ad_id=7";
+           
+            web.Children.Add(browser);
+            //    browser.TitleChanged += (s, e) => this. = e;
             this.Unloaded += FirstPage_Unloaded;
           //  webview.DocumentTitleChanged += (s, e) => Title = e.Title;
 
@@ -26,10 +31,16 @@ namespace GisAvalonia.Views
             {
                 foreach( var child in web.Children )
                 {
-                   var view= child as WebView;
-                    if( view != null )
+                    //var view= child as WebView;
+                    // if( view != null )
+                    // {
+                    //     view.Close();
+                    //
+                    // 
+                    var view = child as AvaloniaCefBrowser;
+                    if (view != null)
                     {
-                        view.Close();
+                        view.Dispose();
                     }
                 }
             }

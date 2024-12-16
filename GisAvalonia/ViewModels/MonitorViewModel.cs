@@ -102,7 +102,7 @@ namespace GisAvalonia.ViewModels
             Task.Run(async () =>
             {
                 //Mqtt.Mqtt.MqttServer();
-                // var mqttClient= Mqtt.Mqtt.Client();
+                //var mqttClient = Mqtt.Mqtt.Client();
                 //Mqtt.Mqtt.SubscribeAsync(mqttClient, "test", (t, p) =>
                 //{
                 //    double value = double.Parse(p.Trim());
@@ -115,7 +115,7 @@ namespace GisAvalonia.ViewModels
                     // 从设备中获取的值 
                     var value = new Random().Next(10, 80);
 
-                 //   Mqtt.Mqtt.PublishStringAsync(client,"test",value.ToString());
+                    //Mqtt.Mqtt.PublishStringAsync(client,"test",value.ToString());
                     // 存到集合中   缓存       
                     // 显示到页面
                      Value1 = value;

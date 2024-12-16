@@ -21,15 +21,16 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.2" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.2" />
-    <PackageReference Include="CefNet.Avalonia.Eleven" Version="105.3.22248.146" />
+    <PackageReference Include="CefGlue.Avalonia" Version="120.6099.210" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc2" />
     <PackageReference Include="Mapsui.Avalonia" Version="4.1.8" />
     <PackageReference Include="Mapsui.Nts" Version="4.1.8" />
     <PackageReference Include="Mapsui.Rendering.Skia" Version="4.1.8" />
     <PackageReference Include="Mapsui.Tiling" Version="4.1.8" />
     <PackageReference Include="MQTTnet" Version="4.3.7.1207" />
-    <PackageReference Include="Serilog" Version="4.1.0" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
   </ItemGroup>

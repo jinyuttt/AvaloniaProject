@@ -40,11 +40,15 @@ namespace MapAvalonia.MapTools
         {
 
             
-            //  string url = "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";//arcgis影像
+           //  string url = "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";//arcgis影像
            
             string url = "https://rt2.map.gtimg.com/realtimerender?z={z}&x={x}&y={y}&type=vector&style=0";//腾讯
-           // url = "https://rt2.map.gtimg.com/tile?z={z}&x={x}&y={y}&type=vector&styleid=3&version=376";//腾讯底图
-            url = "https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}"; //ArcGIS Server发布的WMTS地图服务
+                                                                                                          //  url = "https://rt2.map.gtimg.com/tile?z={z}&x={x}&y={y}&type=vector&styleid=3&version=376";//腾讯底图
+                                                                                                          // url = "https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}"; //ArcGIS Server发布的WMTS地图服务
+          //  url = "https://basemaps.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/tile/{z}/{y}/{x}";
+
+
+
             return new HttpTileSource(new GlobalSphericalMercator() { Srs= "EPSG:3857" },
                 url,
                 name: "高德",
