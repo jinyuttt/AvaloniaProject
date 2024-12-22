@@ -75,13 +75,16 @@
                 <Grid Name="PART_Header" ColumnDefinitions="Auto,*">
                  
                   <TextBlock  x:Name="PART_HeaderIco" Text="{Binding IconCode}" FontFamily="{StaticResource Iconfont}"  FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  
+                  
                   <ContentPresenter x:Name="PART_HeaderPresenter" Grid.Column="1"
                                  Focusable="False"
-                                 Content="{Binding Header} "
+                           
                     HorizontalContentAlignment="{TemplateBinding HorizontalAlignment}"
                     Margin="5,0,0,0" FontSize="13"
                     Padding="{TemplateBinding Padding}" />
-                  
+                  <TextBlock  x:Name="PART_HeaderText" Text="{Binding Header}" Grid.Column="1" FontFamily="{StaticResource Iconfont}"  FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
 
                 </Grid>             
               </Border>
@@ -166,7 +169,7 @@
       <TreeView Background="Transparent" BorderThickness="0" ItemsSource="{Binding TreeList}">
         <TreeView.ItemTemplate>
        <TreeDataTemplate ItemsSource="{Binding Children}" >
-       <!--  <Grid>
+         <!--<Grid>
            <Grid.ColumnDefinitions>
              <ColumnDefinition  />
              <ColumnDefinition/>
@@ -233,7 +236,8 @@
                       <ColumnDefinition/>
                       <ColumnDefinition Width="auto" MinWidth="10"/>
                     </Grid.ColumnDefinitions>
-                    <ContentPresenter  Content="{Binding Header}" FontFamily="{TemplateBinding}" FontSize="{TemplateBinding}" VerticalAlignment="Center" Margin="10,5,5,5"/>
+                    <ContentPresenter  FontFamily="{TemplateBinding}" FontSize="{TemplateBinding}" VerticalAlignment="Center" Margin="10,5,5,5"/>
+                    <TextBlock  x:Name="Tab_HeaderText" Text="{Binding Header}"  FontFamily="{StaticResource Iconfont}"  FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Grid Grid.Column="1" Width="30" Margin="0,0,3,0">
                       <Button Classes="TabCloseButtonStyle" Grid.Column="1"   Foreground="{TemplateBinding Foreground}" Margin="3,0"
                               Command="{Binding CloseTabCommand}" CommandParameter="{Binding}" />
